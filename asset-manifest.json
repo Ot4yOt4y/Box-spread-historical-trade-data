@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Box-spread-trades-history/static/css/main.8f221c50.css",
+    "main.js": "/Box-spread-trades-history/static/js/main.db061e6d.js",
+    "static/js/453.22df0408.chunk.js": "/Box-spread-trades-history/static/js/453.22df0408.chunk.js",
+    "static/media/background.png": "/Box-spread-trades-history/static/media/background.e4796cb348d6d8cc5d35.png",
+    "index.html": "/Box-spread-trades-history/index.html",
+    "main.8f221c50.css.map": "/Box-spread-trades-history/static/css/main.8f221c50.css.map",
+    "main.db061e6d.js.map": "/Box-spread-trades-history/static/js/main.db061e6d.js.map",
+    "453.22df0408.chunk.js.map": "/Box-spread-trades-history/static/js/453.22df0408.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8f221c50.css",
+    "static/js/main.db061e6d.js"
+  ]
+}
