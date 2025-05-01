@@ -7,9 +7,9 @@ function App() {
 
   let endpoint;
     if (activeTab === "ESTX50 (OESX)") {
-      endpoint = "http://127.0.0.1:5000/api/estx50";
+      endpoint = "https://box-spread-trades-history.onrender.com/api/estx50";
     } else {
-      endpoint = "http://127.0.0.1:5000/api/smi";
+      endpoint = "https://box-spread-trades-history.onrender.com/api/smi";
     }
 
   const scrollToFAQ = () => {
