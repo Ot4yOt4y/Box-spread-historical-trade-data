@@ -15,14 +15,9 @@ CORS(app)
 load_dotenv()
 
 def connect_to_db():
-    conn = psycopg2.connect(
-        dbname=os.getenv("DB_NAME"),
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        host=os.getenv("DB_HOST"),
-        port=os.getenv("DB_PORT")
-    )
-    return conn
+    url = os.getenv("DATABASE_URL")
+
+    return psycopg2.connect(url, sslmode="require", cursor_factory=RealDictCursor)
 
 
 @app.route('/api/estx50', methods=['GET'])
@@ -40,7 +35,7 @@ def get_estx50_box_spreads():
             trdtime,
             contract_duration,
             lower_strike,
-            higher_strike,
+            higher_strike
             
         FROM box_spreads 
         WHERE instrument LIKE 'OESX'

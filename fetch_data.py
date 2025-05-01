@@ -3,7 +3,10 @@ import glob
 import pandas as pd
 import psycopg2
 from datetime import datetime
+from dotenv import load_dotenv
 
+
+load_dotenv()
 
 def extract_instrument_name(contract):
     if '.' in contract:
@@ -153,17 +156,9 @@ if __name__ == "__main__":
     data_folder = "data_files"
     csv_files = glob.glob(os.path.join(data_folder, "*.csv"))
     
-    db_name = input("Enter database name:")
-    db_user = input("Enter database username:")
-    db_password = input("Enter database password:")
-    
-    connect = psycopg2.connect(
-        dbname=db_name,
-        user=db_user,
-        password=db_password,  
-        host="localhost",
-        port=5432
-    )
+    DATABASE_URL = os.getenv("DATABASE_URL")
+    connect = psycopg2.connect(DATABASE_URL, sslmode="require")
+
     
     for file_path in csv_files:
         with open("processed_files.txt", "r+") as f:
