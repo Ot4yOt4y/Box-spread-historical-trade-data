@@ -22,8 +22,8 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col ">
       <div className="flex-1 shadow-lg bg-[url(/public/background.png)] bg-cover bg-center ...">
-        <div className="bg-[#00142c] bg-opacity-70">
-          <header className="pt-8 pl-8 pr-8 pb-16 border-[#d7dde5]]">
+        <div className="bg-[#00142c] bg-opacity-80 bg-gradient-to-r from-transparent from-0% via-[#00142c] via-50% to-transparent to-100% ...">
+          <header className="fixed top-0 left-0 w-full z-50 pt-8 pl-8 pr-8 pb-8 backdrop-blur-md bg-transparent">
             <div className="container mx-auto flex items-center justify-center space-x-[0px]">
               <nav>
                 <ul className="flex divide-x divide-gray-400">
@@ -85,7 +85,7 @@ function App() {
             </div>
           </header>
 
-          <main>
+          <main className="pt-[120px]">
             <InterestOverTimeChart endpoint={endpoint} instrument={activeTab} />
           </main>
 
