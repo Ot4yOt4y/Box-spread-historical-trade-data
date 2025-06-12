@@ -27,7 +27,7 @@ function App() {
             <div className="container mx-auto flex items-center justify-center space-x-[0px]">
               <nav>
                 <ul className="flex divide-x divide-gray-400">
-                  <li className="text-xl font-[DM Sans] px-24">
+                  <h1 className="text-xl font-[DM Sans] px-24">
                     <button
                       onClick={() => setActiveTab("ESTX50 (OESX)")}
                       className={`${
@@ -41,11 +41,11 @@ function App() {
                         before:left-[50%] after:transition-[width] after:ease-in-out after:duration-700 after:absolute 
                         after:bg-blue-100 after:origin-center after:h-[2px] after:w-0 hover:after:w-[50%] after:bottom-[-8px] after:right-[50%]`}
                     >
-                      ESTX50
+                      EURO STOXX 50
                     </button>
-                  </li>
+                  </h1>
 
-                  <li className="text-xl font-[DM Sans] px-24">
+                  <h1 className="text-xl font-[DM Sans] px-24">
                     <button
                       onClick={() => setActiveTab("SMI (OSMI)")}
                       className={`${
@@ -59,11 +59,11 @@ function App() {
                         before:left-[50%] after:transition-[width] after:ease-in-out after:duration-700 after:absolute 
                         after:bg-blue-100 after:origin-center after:h-[2px] after:w-0 hover:after:w-[50%] after:bottom-[-8px] after:right-[50%]`}
                     >
-                      SMI
+                      Swiss Market Index
                     </button>
-                  </li>
+                  </h1>
 
-                  <li className="text-xl font-[DM Sans] px-24">
+                  <h1 className="text-xl font-[DM Sans] px-24 mr-20">
                     <button
                       onClick={scrollToFAQ}
                       className={`${
@@ -79,13 +79,13 @@ function App() {
                     >
                       FAQ
                     </button>
-                  </li>
+                  </h1>
                 </ul>
               </nav>
             </div>
           </header>
 
-          <main className="pt-[120px]">
+          <main className="pt-[120px] mb-24">
             <InterestOverTimeChart endpoint={endpoint} instrument={activeTab} />
           </main>
 

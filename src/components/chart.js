@@ -37,6 +37,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   const [durationBounds, setDurationBounds] = useState([0, 100]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [displayInstrumentName, setInstrumentName] = useState("");
 
   //merges date and trdtime into Date object
   const getCombinedDateTime = (dateStr, trdtime) => {
@@ -120,16 +121,30 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
     //maps data to chart data points
     const chartPoints = filteredData.map((spread) => {
       const combinedDatetime = getCombinedDateTime(spread.date, spread.trdtime);
+      let instrumentName;
+      console.log(spread.instrument);
+      if (spread.instrument === "OESX"){
+        instrumentName = "EURO STOXX 50 (OESX)";
+      } else if (spread.instrument === "OSMI") {
+        instrumentName = "Swiss Market Index (OSMI)";
+      } else {
+        instrumentName = spread.instrument;
+      }
       return {
         x: combinedDatetime,
         y: parseFloat(spread.interest_rate),
         id: spread.id,
-        instrument: spread.instrument,
+        instrument: instrumentName,
         contract_duration: spread.contract_duration,
         lower_strike: spread.lower_strike,
         higher_strike: spread.higher_strike,
       };
     });
+
+    //selects instrument name from first data point
+    if (chartPoints.length > 0) {
+      setInstrumentName(chartPoints[0].instrument);
+    }
 
     setChartData({
       datasets: [
@@ -193,7 +208,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
       },
       title: {
         display: true,
-        text: `Interest Rate for ${instrument} Box Trades`,
+        text: `Interest Rate for ${displayInstrumentName} box spread trades`,
         color: "gray",
         font: {
           size: 12,
