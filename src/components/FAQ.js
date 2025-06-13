@@ -8,6 +8,61 @@ const FAQ = () => {
       answer:
         "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed payoffs.",
     },
+    {
+      question: "What is a box spread?",
+      answer:
+        "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed payoffs.",
+    },
+        {
+      question: "What is a box spread?",
+      answer:
+        "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed payoffs.",
+    },
+    {
+      question: "What is a box spread?",
+      answer:
+        "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed payoffs.",
+    },
+        {
+      question: "What is a box spread?",
+      answer:
+        "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed payoffs.",
+    },
+    {
+      question: "What is a box spread?",
+      answer:
+        "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed payoffs.",
+    },
+        {
+      question: "What is a box spread?",
+      answer:
+        "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed payoffs.",
+    },
+    {
+      question: "What is a box spread?",
+      answer:
+        "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed payoffs.",
+    },
+        {
+      question: "What is a box spread?",
+      answer:
+        "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed payoffs.",
+    },
+    {
+      question: "What is a box spread?",
+      answer:
+        "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed payoffs.",
+    },
+        {
+      question: "What is a box spread?",
+      answer:
+        "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed payoffs.",
+    },
+    {
+      question: "What is a box spread?",
+      answer:
+        "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed payoffs.",
+    },
   ];
 
   return (

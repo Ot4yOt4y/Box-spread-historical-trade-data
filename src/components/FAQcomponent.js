@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 
 const FAQItem = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <div className="border-b border-gray-200 py-4">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left flex justify-between items-center focus:outline-none"
-      >
+    <div className="border-b border-gray-200 py-4 group">
+      <div className="w-full text-left flex justify-between items-center">
         <span className="text-lg font-medium text-white">{question}</span>
-        <span className="text-2xl font-bold text-white">
-          {isOpen ? "-" : "+"}
+        <span className="text-2xl font-bold text-white group-hover:rotate-45 transition-transform duration-200">
+          +
         </span>
-      </button>
-      {isOpen && <div className="mt-2 text-white">{answer}</div>}
+      </div>
+      <div
+        className="mt-2 text-white max-h-0 opacity-0 overflow-hidden transition-all duration-300 ease-in-out group-hover:max-h-96 group-hover:opacity-100"
+      >
+        <div className="pb-2">{answer}</div>
+      </div>
     </div>
   );
 };
 
 export default FAQItem;
+

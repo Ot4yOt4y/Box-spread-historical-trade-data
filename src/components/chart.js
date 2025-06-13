@@ -38,6 +38,10 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [displayInstrumentName, setInstrumentName] = useState("");
+  const [daysOnHover, setDays] = useState(null);
+  const sliderRef = React.useRef(null);
+  const [movingSlider, setSlider] = useState(false);
+
 
   //merges date and trdtime into Date object
   const getCombinedDateTime = (dateStr, trdtime) => {
@@ -266,7 +270,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             id="expirationFilter"
             value={selectedExpiration}
             onChange={(e) => setSelectedExpiration(e.target.value)}
-            className="bg-[#ffffff26] rounded px-2 py-1 focus:outline-none focus:bg-blue-100"
+            className="bg-[#ffffff26] rounded px-2 py-1 border border-transparent hover:border-blue-100 transition-colors duration-300 focus:outline-none focus:bg-blue-100"
           >
             <option value="All">All</option>
             {expirationOptions.map((exp, index) => (
@@ -285,16 +289,43 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             Filter by Contract Duration:
           </label>
           <div className="mx-4">
-            <Slider
-              range
-              min={durationBounds[0]}
-              max={durationBounds[1]}
-              value={durationRange}
-              onChange={(value) => setDurationRange(value)}
-              trackStyle={{ backgroundColor: "black" }}
-              railStyle={{ backgroundColor: "#ffffff26" }}
-              handleStyle={[{ borderColor: "black" }, { borderColor: "black" }]}
-            />
+          <div
+  ref={sliderRef}
+  className="relative w-full"
+  onMouseMove={(e) => {
+    const bounds = sliderRef.current.getBoundingClientRect();
+    const x = e.clientX - bounds.left; // Mouse position relative to slider
+    const percent = Math.min(Math.max(x / bounds.width, 0), 1);
+    const value = Math.round(durationBounds[0] + percent * (durationBounds[1] - durationBounds[0]));
+    setDays({ x, value });
+  }}
+  onMouseLeave={() => setDays(null)}
+>
+<Slider
+  range
+  min={durationBounds[0]}
+  max={durationBounds[1]}
+  value={durationRange}
+  onChange={(value) => setDurationRange(value)}
+  onBeforeChange={() => setSlider(true)}
+  onAfterChange={() => setSlider(false)}
+  trackStyle={{ backgroundColor: "black" }}
+  railStyle={{ backgroundColor: "#ffffff26" }}
+  handleStyle={[{ borderColor: "black" }, { borderColor: "black" }]}
+/>
+
+
+{daysOnHover && !movingSlider && (
+    <div
+      className="absolute -top-8 bg-gray-800 text-white text-xs px-2 py-1 rounded pointer-events-none transition-opacity duration-200"
+      style={{ left: daysOnHover.x, transform: "translateX(-50%)" }}
+    >
+      {daysOnHover.value} days
+    </div>
+  )}
+</div>
+
+
           </div>
           <div className="text-white mt-2 text-center">
             {`Contract Duration: ${durationRange[0]} - ${durationRange[1]} days`}
