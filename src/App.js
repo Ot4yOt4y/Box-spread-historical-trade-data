@@ -31,7 +31,7 @@ function App() {
       <div className="flex-1 shadow-lg">
         <div className="bg-[#00142c] bg-opacity-80 bg-gradient-to-r from-transparent from-0% via-[#00142c] via-50% to-transparent to-100% ...">
           <header className="fixed top-0 left-0 w-full z-50 pt-8 pl-8 pr-8 pb-8 backdrop-blur-md bg-transparent">
-            <div className="pointer-events-none absolute bottom-0 left-1/2 w-3/5 h-px transform -translate-x-1/2 bg-gradient-to-r from-opacity-50 via-[#9ca3af] to-transparent opacity-100"/>
+            <div className="pointer-events-none absolute bottom-0 left-1/2 w-4/5 h-px transform -translate-x-1/2 bg-gradient-to-r from-opacity-50 via-[#9ca3af] to-transparent opacity-100"/>
               <div className="container mx-auto flex items-center justify-center space-x-[0px]">
                 <nav>
                   <ul className="flex divide-x divide-gray-400">
