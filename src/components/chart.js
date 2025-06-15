@@ -28,6 +28,41 @@ ChartJS.register(
   zoomPlugin
 );
 
+function linearRegression(points) {
+  const n = points.length;
+  if (n < 2) {
+    return [];
+  }
+  
+  let X = 0, Y = 0;
+  let XY = 0, X2 = 0;
+
+  for (let i = 0; i < n; i++) {
+    let x;
+    if(points[i].x instanceof Date) {
+      x = points[i].x.getTime();
+    } else {
+      x = points[i].x;
+    }
+    const y = points[i].y;
+    X += x;
+    Y += y;
+    XY += x*y;
+    X2 += x*x;
+  }
+
+  const slope = (n*XY - X*Y) / (n*X2 - X*X);
+  const expectedY = (Y - slope*X) / n;
+
+  const minX = Math.min(...points.map(p => new Date(p.x).getTime()));
+  const maxX = Math.max(...points.map(p => new Date(p.x).getTime()));
+
+  return [
+    {x: new Date(minX), y: slope*minX + expectedY},
+    {x: new Date(maxX), y: slope*maxX + expectedY},
+  ];
+}
+
 const InterestOverTimeChart = ({ endpoint, instrument }) => {
   const [rawData, setRawData] = useState([]);
   const [chartData, setChartData] = useState(null);
@@ -150,6 +185,8 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
       setInstrumentName(chartPoints[0].instrument);
     }
 
+    const trend = linearRegression(chartPoints);
+
     setChartData({
       datasets: [
         {
@@ -160,6 +197,16 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
           pointRadius: 3,
           tension: 0.1,
           showLine: false,
+        },
+        {
+          label: "Trend Line",
+          data: trend,
+          borderColor: "#dbeafe",
+          borderDash: [5, 5],
+          borderWidth: 0.3,
+          pointRadius: 0,
+          tension: 0,
+          showLine: true,
         },
       ],
     });
@@ -215,7 +262,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
         text: `Interest Rate for ${displayInstrumentName} box spread trades`,
         color: "gray",
         font: {
-          size: 12,
+          size: 13,
           weight: "lighter",
         },
         padding: {
@@ -228,7 +275,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
           label: function (context) {
             const dataPoint = context.raw;
             return [
-              `Instrument: ${dataPoint.instrument}`,
+              `Index (instrument): ${dataPoint.instrument}`,
               `Annualized Interest Rate(%): ${dataPoint.y.toFixed(3)}`,
               `Contract Duration: ${dataPoint.contract_duration} days`,
               `Lower Strike: ${dataPoint.lower_strike}`,
