@@ -138,28 +138,30 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   useEffect(() => {
     if (rawData.length === 0) return;
 
-    //filters data by expiration date
-    let filteredData = rawData;
+    const now = new Date();
+    const earliestDate = new Date();
+    earliestDate.setDate(now.getDate() - parseInt(showDaysBack || 0));
 
-    if (selectedExpiration !== "All") {
-      filteredData = filteredData.filter((item) => {
-        return (
-          new Date(item.expiration_date).getTime() === new Date(selectedExpiration).getTime()
-        );
-      });
+    const filteredByDays = rawData.filter((item) => {
+      const tradeDate = getCombinedDateTime(item.date, item.trdtime);
+      return tradeDate >= earliestDate;
+    });
+
+    const expirations = Array.from(
+      new Set(filteredByDays.map((item) => new Date(item.expiration_date).getTime()))
+    ).map((ts) => new Date(ts).toISOString()).sort((a, b) => new Date(a) - new Date(b));
+
+    setExpirationOptions(expirations);
+
+    if (selectedExpiration !== "All" && !expirations.includes(selectedExpiration)) {
+      setSelectedExpiration("All");
     }
 
-    //how many days-back filter
-    const validDaysBack = parseInt(showDaysBack);
-    if (!isNaN(validDaysBack)) {
-      const now = new Date();
-      const earliestDate = new Date(now);
-      earliestDate.setDate(now.getDate() - validDaysBack);
-
-      filteredData = filteredData.filter((item) => {
-        const combined = getCombinedDateTime(item.date, item.trdtime);
-        return combined >= earliestDate;
-      });
+    let filteredData = filteredByDays;
+    if (selectedExpiration !== "All") {
+      filteredData = filteredData.filter((item) =>
+          new Date(item.expiration_date).getTime() === new Date(selectedExpiration).getTime()
+      );
     }
 
     //filters data by contract duration
@@ -316,9 +318,9 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   return (
     <div className="max-w-[1100px] mx-auto">
       <Line data={chartData} options={options} />
-      <div className="mb-4 flex flex-col space-y-6 mt-12">
+      <div className="mb-4 flex flex-col space-y-6 mt-10">
         <div className="flex items-center space-x-3">
-          <label htmlFor="showDaysBack" className="font-semibold text-white">
+          <label htmlFor="showDaysBack" className="text-white">
             Show trades from past:
           </label>
           <input
@@ -332,14 +334,14 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
               }
             }}
             min={1}
-            className="bg-[#ffffff26] rounded px-2 py-1 border border-transparent hover:border-blue-100 transition-colors duration-300 focus:outline-none focus:bg-blue-100 w-24 text-center"
+            className="bg-[#ffffff26] rounded border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none w-16 text-center"
           />
           <span className="text-white">days</span>
         </div>
         <div className="flex items-center space-x-3">
           <label
             htmlFor="expirationFilter"
-            className="font-semibold text-white"
+            className="text-white"
           >
             Filter by expiration date:
           </label>
@@ -347,7 +349,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             id="expirationFilter"
             value={selectedExpiration}
             onChange={(e) => setSelectedExpiration(e.target.value)}
-            className="bg-[#ffffff26] rounded px-2 py-1 border border-transparent hover:border-blue-100 transition-colors duration-300 focus:outline-none focus:bg-blue-100"
+            className="bg-[#ffffff26] h-8 pb-0.5 px-2 rounded border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none focus:bg-[#26364b]"
           >
             <option value="All">All</option>
             {expirationOptions.map((exp, index) => (
@@ -361,50 +363,48 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             ))}
           </select>
         </div>
-        <div className="pt-4 flex flex-col">
-          <label className="font-semibold text-white mb-2">
+        <div className="flex flex-col">
+          <label className="text-white mb-2">
             Filter by contract duration:
           </label>
           <div className="mx-4">
           <div
-  ref={sliderRef}
-  className="relative w-full"
-  onMouseMove={(e) => {
-    const bounds = sliderRef.current.getBoundingClientRect();
-    const x = e.clientX - bounds.left; // Mouse position relative to slider
-    const percent = Math.min(Math.max(x / bounds.width, 0), 1);
-    const value = Math.round(durationBounds[0] + percent * (durationBounds[1] - durationBounds[0]));
-    setDays({ x, value });
-  }}
-  onMouseLeave={() => setDays(null)}
->
-<Slider
-  range
-  min={durationBounds[0]}
-  max={durationBounds[1]}
-  value={durationRange}
-  onChange={(value) => setDurationRange(value)}
-  onBeforeChange={() => setSlider(true)}
-  onAfterChange={() => setSlider(false)}
-  trackStyle={{ backgroundColor: "black" }}
-  railStyle={{ backgroundColor: "#ffffff26" }}
-  handleStyle={[{ borderColor: "black" }, { borderColor: "black" }]}
-/>
+            ref={sliderRef}
+            className="relative w-full"
+            onMouseMove={(e) => {
+              const bounds = sliderRef.current.getBoundingClientRect();
+              const x = e.clientX - bounds.left; // Mouse position relative to slider
+              const percent = Math.min(Math.max(x / bounds.width, 0), 1);
+              const value = Math.round(durationBounds[0] + percent * (durationBounds[1] - durationBounds[0]));
+              setDays({ x, value });
+            }}
+            onMouseLeave={() => setDays(null)}
+          >
+          <Slider
+            range
+            min={durationBounds[0]}
+            max={durationBounds[1]}
+            value={durationRange}
+            onChange={(value) => setDurationRange(value)}
+            onBeforeChange={() => setSlider(true)}
+            onAfterChange={() => setSlider(false)}
+            trackStyle={{ backgroundColor: "black" }}
+            railStyle={{ backgroundColor: "#ffffff26" }}
+            handleStyle={[{ borderColor: "black" }, { borderColor: "black" }]}
+          />
 
-
-{daysOnHover && !movingSlider && (
-    <div
-      className="absolute -top-8 bg-gray-800 text-white text-xs px-2 py-1 rounded pointer-events-none transition-opacity duration-200"
-      style={{ left: daysOnHover.x, transform: "translateX(-50%)" }}
-    >
-      {daysOnHover.value} days
-    </div>
-  )}
-</div>
-
+          {daysOnHover && !movingSlider && (
+              <div
+                className="absolute -top-8 bg-gray-800 text-white text-xs px-2 py-1 rounded pointer-events-none transition-opacity duration-200"
+                style={{ left: daysOnHover.x, transform: "translateX(-50%)" }}
+              >
+                {daysOnHover.value} days
+              </div>
+            )}
+          </div>
 
           </div>
-          <div className="text-white mt-2 text-center">
+          <div className="text-white mt-1 text-sm text-center">
             {`Contract Duration: ${durationRange[0]} - ${durationRange[1]} days`}
           </div>
         </div>
