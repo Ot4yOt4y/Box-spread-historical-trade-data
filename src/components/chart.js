@@ -76,6 +76,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   const [daysOnHover, setDays] = useState(null);
   const sliderRef = React.useRef(null);
   const [movingSlider, setSlider] = useState(false);
+  const [showDaysBack, setDaysBack] = useState("180");
 
 
   //merges date and trdtime into Date object
@@ -138,15 +139,26 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
     if (rawData.length === 0) return;
 
     //filters data by expiration date
-    let filteredData;
-    if (selectedExpiration === "All") {
-      filteredData = rawData;
-    } else {
-      filteredData = rawData.filter((item) => {
+    let filteredData = rawData;
+
+    if (selectedExpiration !== "All") {
+      filteredData = filteredData.filter((item) => {
         return (
-          new Date(item.expiration_date).getTime() ===
-          new Date(selectedExpiration).getTime()
+          new Date(item.expiration_date).getTime() === new Date(selectedExpiration).getTime()
         );
+      });
+    }
+
+    //how many days-back filter
+    const validDaysBack = parseInt(showDaysBack);
+    if (!isNaN(validDaysBack)) {
+      const now = new Date();
+      const earliestDate = new Date(now);
+      earliestDate.setDate(now.getDate() - validDaysBack);
+
+      filteredData = filteredData.filter((item) => {
+        const combined = getCombinedDateTime(item.date, item.trdtime);
+        return combined >= earliestDate;
       });
     }
 
@@ -161,7 +173,6 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
     const chartPoints = filteredData.map((spread) => {
       const combinedDatetime = getCombinedDateTime(spread.date, spread.trdtime);
       let instrumentName;
-      console.log(spread.instrument);
       if (spread.instrument === "OESX"){
         instrumentName = "EURO STOXX 50 (OESX)";
       } else if (spread.instrument === "OSMI") {
@@ -210,7 +221,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
         },
       ],
     });
-  }, [rawData, selectedExpiration, durationRange]);
+  }, [rawData, selectedExpiration, durationRange, showDaysBack]);
 
   const options = {
     responsive: true,
@@ -307,11 +318,30 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
       <Line data={chartData} options={options} />
       <div className="mb-4 flex flex-col space-y-6 mt-12">
         <div className="flex items-center space-x-3">
+          <label htmlFor="showDaysBack" className="font-semibold text-white">
+            Show trades from past:
+          </label>
+          <input
+            type="number"
+            id="daysBack"
+            value={showDaysBack}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val === "" || (/^\d+$/.test(val) && val.length <= 5)) {
+                setDaysBack(val);
+              }
+            }}
+            min={1}
+            className="bg-[#ffffff26] rounded px-2 py-1 border border-transparent hover:border-blue-100 transition-colors duration-300 focus:outline-none focus:bg-blue-100 w-24 text-center"
+          />
+          <span className="text-white">days</span>
+        </div>
+        <div className="flex items-center space-x-3">
           <label
             htmlFor="expirationFilter"
             className="font-semibold text-white"
           >
-            Filter by Expiration Date:
+            Filter by expiration date:
           </label>
           <select
             id="expirationFilter"
@@ -333,7 +363,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
         </div>
         <div className="pt-4 flex flex-col">
           <label className="font-semibold text-white mb-2">
-            Filter by Contract Duration:
+            Filter by contract duration:
           </label>
           <div className="mx-4">
           <div
