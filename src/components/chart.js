@@ -76,8 +76,8 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   const [daysOnHover, setDays] = useState(null);
   const sliderRef = React.useRef(null);
   const [movingSlider, setSlider] = useState(false);
-  const [showDaysBack, setDaysBack] = useState("180");
-  const [maxDaysBack, setMaxDaysBack] = useState(180);
+  const [showDaysBack, setDaysBack] = useState("267");
+  const [maxDaysBack, setMaxDaysBack] = useState(267);
 
 
   //merges date and trdtime into Date object
@@ -327,7 +327,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   return (
     <div className="max-w-[1100px] mx-auto">
       <Line data={chartData} options={options} />
-      <div className="mb-4 flex flex-col space-y-6 mt-10">
+      <div className="flex flex-col space-y-6 mt-10">
         <div className="flex items-center space-x-3">
           <label htmlFor="showDaysBack" className="text-white">
             Show trades from past:
