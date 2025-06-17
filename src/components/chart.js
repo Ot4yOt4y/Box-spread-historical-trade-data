@@ -77,6 +77,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   const sliderRef = React.useRef(null);
   const [movingSlider, setSlider] = useState(false);
   const [showDaysBack, setDaysBack] = useState("180");
+  const [maxDaysBack, setMaxDaysBack] = useState(180);
 
 
   //merges date and trdtime into Date object
@@ -103,6 +104,14 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
           return dtA - dtB;
         });
         setRawData(sortedData);
+
+        if (sortedData.length > 0) {
+          const firstDate = getCombinedDateTime(sortedData[0].date, sortedData[0].trdtime);
+          const currentDay = new Date();
+          const difference = currentDay - firstDate;
+          const diffInDays = Math.floor(difference / (1000*60*60*24));
+          setMaxDaysBack(diffInDays+1);
+        }
 
         //extracts expiration dates
         const expirations = Array.from(
@@ -329,11 +338,12 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             value={showDaysBack}
             onChange={(e) => {
               const val = e.target.value;
-              if (val === "" || (/^\d+$/.test(val) && val.length <= 5)) {
+              if (val === "" || (/^\d+$/.test(val) && val.length <= 5 && parseInt(val) <= maxDaysBack)) {
                 setDaysBack(val);
               }
             }}
             min={1}
+            max={maxDaysBack}
             className="bg-[#ffffff26] rounded border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none w-16 text-center"
           />
           <span className="text-white">days</span>
