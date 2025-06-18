@@ -86,6 +86,18 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
     return new Date(`${datePart} ${trdtime}`);
   };
 
+  const resetDaysBack = () => {
+    setDaysBack(maxDaysBack.toString());
+  };
+
+  const resetExpiration = () => {
+    setSelectedExpiration("All");
+  };
+
+  const resetDurationRange = () => {
+    setDurationRange(durationBounds);
+  };
+
   //fetches box spread data when endpoint changes
   useEffect(() => {
     async function fetchData() {
@@ -328,7 +340,8 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
     <div className="max-w-[1100px] mx-auto">
       <Line data={chartData} options={options} />
       <div className="flex flex-col space-y-6 mt-10">
-        <div className="flex items-center space-x-3">
+      <div className="flex items-center justify-between w-full">
+        <div className="flex items-center space-x-3">          
           <label htmlFor="showDaysBack" className="text-white">
             Show trades from past:
           </label>
@@ -347,8 +360,16 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             className="bg-[#ffffff26] rounded border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none w-16 text-center"
           />
           <span className="text-white">days</span>
+          </div>
+          <button
+            onClick={resetDaysBack}
+            className="text-xs bg-[#ffffff26] content-end text-white px-2 py-1 rounded hover:bg-[#26364b] border border-transparent hover:border-blue-100"
+          >
+            Reset
+          </button>
         </div>
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center space-x-3">
           <label
             htmlFor="expirationFilter"
             className="text-white"
@@ -372,11 +393,26 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
               </option>
             ))}
           </select>
+          </div>
+          <button
+            onClick={resetExpiration}
+            className="text-xs bg-[#ffffff26] text-white px-2 py-1 rounded hover:bg-[#26364b] border border-transparent hover:border-blue-100"
+          >
+            Reset
+          </button>
         </div>
         <div className="flex flex-col">
-          <label className="text-white mb-2">
-            Filter by contract duration:
-          </label>
+            <div className="flex items-center justify-between mb-4">
+              <label className="text-white">
+                Filter by contract duration:
+              </label>
+              <button
+                onClick={resetDurationRange}
+                className="text-xs bg-[#ffffff26] text-white px-2 py-1 rounded hover:bg-[#26364b] border border-transparent hover:border-blue-100"
+              >
+                Reset
+              </button>
+            </div>
           <div className="mx-4">
           <div
             ref={sliderRef}

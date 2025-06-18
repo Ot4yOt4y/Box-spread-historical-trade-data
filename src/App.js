@@ -101,7 +101,7 @@ function App() {
             </div>
           </header>
 
-          <main id="main-content" className="pt-[120px] mt-0.5 pb-24">
+          <main id="main-content" className="pt-[120px] pb-24">
             <InterestOverTimeChart endpoint={endpoint} instrument={activeTab} />
           </main>
         </div>
