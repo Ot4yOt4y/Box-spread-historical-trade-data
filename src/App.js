@@ -30,8 +30,7 @@ function App() {
     <div className="min-h-screen flex flex-col bg-[url(/public/background.png)] bg-cover bg-center bg-no-repeat bg-fixed">
       <div className="flex-1 shadow-lg">
         <div className="bg-[#00142c] bg-opacity-80 bg-gradient-to-r from-transparent from-0% via-[#00142c] via-50% to-transparent to-100% ...">
-          <header className="fixed top-0 left-0 w-full z-50 pt-8 pl-8 pr-8 pb-8 backdrop-blur-md bg-transparent">
-            <div className="pointer-events-none absolute bottom-0 left-1/2 w-full h-px transform -translate-x-1/2 bg-gradient-to-r from-opacity-50 via-[#9ca3af] to-transparent opacity-30"/>
+          <header className="fixed top-0 left-0 w-full z-50 pt-8 pl-8 pr-8 pb-8 backdrop-blur-3xl bg-transparent border-b border-gray-400 border-opacity-30">
               <div className="container mx-auto flex items-center justify-center space-x-[0px]">
                 <nav>
                   <ul className="flex divide-x divide-gray-400">
@@ -110,7 +109,8 @@ function App() {
             <FAQ />
           </section>
         </div>
-        <footer className="text-center text-xs text-gray-400 pt-4 pb-4 bg-gray-900 bg-opacity-80 bg-gradient-to-r from-transparent from-0% via-gray-800 via-50% to-transparent to-100% ...">
+        <div className="bg-[#011121] bg-opacity-80 bg-gradient-to-r from-transparent from-0% via-gray-900 via-50% to-transparent to-100% ...">
+        <footer className="text-center text-xs text-gray-400 pt-4 pb-4 backdrop-blur-3xl bg-transparent border-t border-gray-400 border-opacity-30">
           <div className="flex items-center justify-center space-x-1">
             <svg
               className="w-4 h-4 pr-1 fill-current text-gray-400"
@@ -126,7 +126,7 @@ function App() {
             </a>
           </div>
         </footer>
-
+        </div>
       </div>
     </div>
   );

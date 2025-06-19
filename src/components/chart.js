@@ -86,15 +86,9 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
     return new Date(`${datePart} ${trdtime}`);
   };
 
-  const resetDaysBack = () => {
-    setDaysBack(maxDaysBack.toString());
-  };
-
-  const resetExpiration = () => {
+  const resetAllFilters = () => {
     setSelectedExpiration("All");
-  };
-
-  const resetDurationRange = () => {
+    setDaysBack(maxDaysBack.toString());
     setDurationRange(durationBounds);
   };
 
@@ -337,7 +331,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   if (!chartData) return <div></div>;
 
   return (
-    <div className="max-w-[1100px] mx-auto">
+    <div className="max-w-[1150px] mx-auto">
       <Line data={chartData} options={options} />
       <div className="flex flex-col space-y-6 mt-10">
       <div className="flex items-center justify-between w-full">
@@ -357,16 +351,18 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             }}
             min={1}
             max={maxDaysBack}
-            className="bg-[#ffffff26] rounded border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none w-16 text-center"
+            className="bg-[#ffffff26] border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none w-16 text-center"
           />
           <span className="text-white">days</span>
           </div>
-          <button
-            onClick={resetDaysBack}
-            className="text-xs bg-[#ffffff26] content-end text-white px-2 py-1 rounded hover:bg-[#26364b] border border-transparent hover:border-blue-100"
-          >
-            Reset
-          </button>
+          <div className="flex pr-2">
+            <button
+              onClick={resetAllFilters}
+              className="text-sm bg-[#ffffff26] text-white px-2 py-1 hover:text-red-600 hover:bg-[#26364b] transition duration-300"
+            >
+              Reset Filter
+            </button>
+          </div>
         </div>
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center space-x-3">
@@ -380,7 +376,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             id="expirationFilter"
             value={selectedExpiration}
             onChange={(e) => setSelectedExpiration(e.target.value)}
-            className="bg-[#ffffff26] h-8 pb-0.5 px-2 rounded border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none focus:bg-[#26364b]"
+            className="bg-[#ffffff26] h-8 pb-0.5 px-2 border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none focus:bg-[#26364b]"
           >
             <option value="All">All</option>
             {expirationOptions.map((exp, index) => (
@@ -394,64 +390,48 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             ))}
           </select>
           </div>
-          <button
-            onClick={resetExpiration}
-            className="text-xs bg-[#ffffff26] text-white px-2 py-1 rounded hover:bg-[#26364b] border border-transparent hover:border-blue-100"
-          >
-            Reset
-          </button>
         </div>
-        <div className="flex flex-col">
-            <div className="flex items-center justify-between mb-4">
-              <label className="text-white">
-                Filter by contract duration:
-              </label>
-              <button
-                onClick={resetDurationRange}
-                className="text-xs bg-[#ffffff26] text-white px-2 py-1 rounded hover:bg-[#26364b] border border-transparent hover:border-blue-100"
-              >
-                Reset
-              </button>
+        <div className="flex items-start space-x-4 w-full mt-6">
+          <label className="text-white whitespace-nowrap">
+            Filter by contract duration:
+          </label>
+          <div className="flex flex-col w-full items-center pt-1.5 pl-2 pr-4">
+            <div
+              ref={sliderRef}
+              className="relative w-full"
+              onMouseMove={(e) => {
+                const bounds = sliderRef.current.getBoundingClientRect();
+                const x = e.clientX - bounds.left; // Mouse position relative to slider
+                const percent = Math.min(Math.max(x / bounds.width, 0), 1);
+                const value = Math.round(durationBounds[0] + percent * (durationBounds[1] - durationBounds[0]));
+                setDays({ x, value });
+              }}
+              onMouseLeave={() => setDays(null)}
+            >
+            <Slider
+              range
+              min={durationBounds[0]}
+              max={durationBounds[1]}
+              value={durationRange}
+              onChange={(value) => setDurationRange(value)}
+              onBeforeChange={() => setSlider(true)}
+              onAfterChange={() => setSlider(false)}
+              trackStyle={{ backgroundColor: "black" }}
+              railStyle={{ backgroundColor: "#ffffff26" }}
+              handleStyle={[{ borderColor: "black" }, { borderColor: "black" }]}
+            />
+            {daysOnHover && !movingSlider && (
+                <div
+                  className="absolute -top-8 bg-gray-800 text-white text-xs px-2 py-1 rounded pointer-events-none transition-opacity duration-200"
+                  style={{ left: daysOnHover.x, transform: "translateX(-50%)" }}
+                >
+                  {daysOnHover.value} days
+                </div>
+              )}
             </div>
-          <div className="mx-4">
-          <div
-            ref={sliderRef}
-            className="relative w-full"
-            onMouseMove={(e) => {
-              const bounds = sliderRef.current.getBoundingClientRect();
-              const x = e.clientX - bounds.left; // Mouse position relative to slider
-              const percent = Math.min(Math.max(x / bounds.width, 0), 1);
-              const value = Math.round(durationBounds[0] + percent * (durationBounds[1] - durationBounds[0]));
-              setDays({ x, value });
-            }}
-            onMouseLeave={() => setDays(null)}
-          >
-          <Slider
-            range
-            min={durationBounds[0]}
-            max={durationBounds[1]}
-            value={durationRange}
-            onChange={(value) => setDurationRange(value)}
-            onBeforeChange={() => setSlider(true)}
-            onAfterChange={() => setSlider(false)}
-            trackStyle={{ backgroundColor: "black" }}
-            railStyle={{ backgroundColor: "#ffffff26" }}
-            handleStyle={[{ borderColor: "black" }, { borderColor: "black" }]}
-          />
-
-          {daysOnHover && !movingSlider && (
-              <div
-                className="absolute -top-8 bg-gray-800 text-white text-xs px-2 py-1 rounded pointer-events-none transition-opacity duration-200"
-                style={{ left: daysOnHover.x, transform: "translateX(-50%)" }}
-              >
-                {daysOnHover.value} days
-              </div>
-            )}
-          </div>
-
-          </div>
-          <div className="text-white mt-1 text-sm text-center">
-            {`Contract Duration: ${durationRange[0]} - ${durationRange[1]} days`}
+            <div className="text-white mt-1 text-sm text-center">
+              {`Contract Duration: ${durationRange[0]} - ${durationRange[1]} days`}
+            </div>
           </div>
         </div>
       </div>
