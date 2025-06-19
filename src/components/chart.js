@@ -89,8 +89,26 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   const resetAllFilters = () => {
     setSelectedExpiration("All");
     setDaysBack(maxDaysBack.toString());
-    setDurationRange(durationBounds);
-  };
+    
+      //calculate lowest and highest days for new duration based on maxdaysback
+      const now = new Date();
+      const earliestDate = new Date();
+      earliestDate.setDate(now.getDate() - maxDaysBack);
+
+      const filterBasedOnDays = rawData.filter((item) => {
+        const tradeDate = getCombinedDateTime(item.date, item.trdtime);
+        return tradeDate >= earliestDate;
+      });
+
+      const filteredByExp = filterBasedOnDays;
+
+      const durations = filteredByExp.map((item) => item.contract_duration);
+      const newMin = Math.min(...durations);
+      const newMax = Math.max(...durations);
+
+      setDurationBounds([newMin, newMax]);
+      setDurationRange([newMin, newMax]);  
+    };
 
   //fetches box spread data when endpoint changes
   useEffect(() => {
@@ -148,6 +166,38 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   useEffect(() => {
     setSelectedExpiration("All");
   }, [endpoint]);
+
+  useEffect(() => {
+  if (rawData.length === 0) return;
+
+  const now = new Date();
+  const earliestDate = new Date();
+  earliestDate.setDate(now.getDate() - parseInt(showDaysBack || 0));
+
+  const filterBasedOnDays = rawData.filter((item) => {
+    const tradeDate = getCombinedDateTime(item.date, item.trdtime);
+    return tradeDate >= earliestDate;
+  });
+
+  let filteredData = filterBasedOnDays;
+  if (selectedExpiration !== "All") {
+    filteredData = filteredData.filter(
+      (item) => new Date(item.expiration_date).getTime() === new Date(selectedExpiration).getTime()
+    );
+  }
+
+  const durations = filteredData.map((item) => item.contract_duration);
+  if (durations.length > 0) {
+    const newMin = Math.min(...durations);
+    const newMax = Math.max(...durations);
+    setDurationBounds([newMin, newMax]);
+    setDurationRange([newMin, newMax]);
+
+  } else {
+    setDurationBounds([0, 0]);
+    setDurationRange([0, 0]);
+  }
+}, [rawData, selectedExpiration, showDaysBack]);
 
   //updates chart according to filters
   useEffect(() => {
