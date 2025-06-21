@@ -29,7 +29,13 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-[url(/public/background.png)] bg-cover bg-center bg-no-repeat bg-fixed">
       <div className="flex-1 shadow-lg">
-        <div className="bg-[#00142c] bg-opacity-80 bg-gradient-to-r from-transparent from-0% via-[#00142c] via-50% to-transparent to-100% ...">
+        <div
+          className="bg-[#00142c] bg-opacity-80"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, transparent 0%, #00142c 40%, #00142c 60%, transparent 100%)'
+          }}
+        >
           <header className="fixed top-0 left-0 w-full z-50 pt-8 pl-8 pr-8 pb-8 backdrop-blur-3xl bg-transparent border-b border-gray-400 border-opacity-30">
               <div className="container mx-auto flex items-center justify-center space-x-[0px]">
                 <nav>
@@ -104,12 +110,24 @@ function App() {
             <InterestOverTimeChart endpoint={endpoint} instrument={activeTab} />
           </main>
         </div>
-        <div className="bg-[#011121] bg-opacity-80 bg-gradient-to-r from-transparent from-0% via-gray-900 via-50% to-transparent to-100% ...">
-          <section id="faq-section" className="scroll-mt-8">
+        <div
+          className="bg-[#011121] bg-opacity-80"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, transparent 0%, #011121 40%, #011121 60%, transparent 100%)'
+          }}
+        >
+          <section id="faq-section" className="scroll-mt-12">
             <FAQ />
           </section>
         </div>
-        <div className="bg-[#011121] bg-opacity-80 bg-gradient-to-r from-transparent from-0% via-gray-900 via-50% to-transparent to-100% ...">
+        <div
+          className="bg-[#011121] bg-opacity-80"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, transparent 0%, #011121 40%, #011121 60%, transparent 100%)'
+          }}
+        >
         <footer className="text-center text-xs text-gray-400 pt-4 pb-4 backdrop-blur-3xl bg-transparent border-t border-gray-400 border-opacity-30">
           <div className="flex items-center justify-center space-x-1">
             <svg
