@@ -4,6 +4,19 @@ import FAQItem from "./FAQcomponent";
 const FAQ = () => {
   const faqs = [
     {
+      question: "How does the data on the graph help investors?",
+      answer: (
+        <>
+          <p className="mb-4">
+            The graph provides historical trade data for complex options strategy box spread on the EURO STOXX 50 (OESX) and Swiss Market Index (OSMI). Brokers typically don't offer past execution data for such multi-leg orders, leaving investors without a clear view of where the market has been and forcing them to estimate fair pricing.
+          </p>
+          <p className="mb-4">
+            The data visualized on the graph is extracted from EUREX T7 Entry Service .csv files, which provide past trade data for off-order-book activity. While this isn't the same as official exchange reported trade data - which is expensive and often out of reach for individual investors, it offers a reliable and cost-effective alternative for gauging where the market is at.
+          </p>
+        </>
+      ),
+    },
+    {
       question: "What is a box spread?",
       answer:
         "A box spread is an options trading strategy that creates a risk-free position using a combination of calls and puts. It effectively simulates a loan with fixed interest rate.",
@@ -38,17 +51,12 @@ const FAQ = () => {
       answer:
         "The trades displayed are from off-order-book executions, such as negotiated block trades or complex multi-leg strategies executed directly through EUREX. Importantly, off-order-book trades generally align with where the market stands on the order book. The wider-looking spreads typically result from how the trades are packaged and executed, not necessarily from market inefficiency.",
     },
-    {
-      question: "Is this website offering financial advice?",
-      answer:
-        "No. All content on this site is for informational and educational purposes only.",
-    },
   ];
 
   return (
     <section className="py-12">
       <div className="max-w-3xl mx-auto px-4">
-        <h2 className="text-xl font-bold text-center text-white mb-16 mt-16">
+        <h2 className="text-xl font-bold text-center text-white mb-16 mt-20">
           Frequently Asked Questions
         </h2>
         <div className="space-y-4 mb-24">

@@ -27,7 +27,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[url(/public/background.png)] bg-cover bg-center bg-no-repeat bg-fixed">
+    <div className="min-h-screen flex flex-col bg-[url(/public/background.jpeg)] bg-cover bg-center bg-no-repeat bg-fixed">
       <div className="flex-1 shadow-lg">
         <div
           className="bg-[#00142c] bg-opacity-80"
@@ -117,7 +117,7 @@ function App() {
               'linear-gradient(to right, transparent 0%, #011121 40%, #011121 60%, transparent 100%)'
           }}
         >
-          <section id="faq-section" className="scroll-mt-12">
+          <section id="faq-section" className="scroll-mt-8">
             <FAQ />
           </section>
         </div>
