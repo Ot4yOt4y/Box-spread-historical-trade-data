@@ -46,57 +46,40 @@ function App() {
                           setActiveTab("ESTX50 (OESX)");
                           scrollToMain();
                         }}
-                        className={`${
+                        className={`title-hover ${
                           activeTab === "ESTX50 (OESX)"
-                            ? "underline underline-offset-[12px] decoration-[0.15rem] text-blue-100 text-shadow"
+                            ? "underline underline-offset-[12px] decoration-[0.15rem] text-blue-100"
                             : "text-white"
-                        } hover:text-blue-100 text-shadow border-hidden relative 
-                          cursor-pointer transition-all ease-in-out before:transition-[width] 
-                          before:ease-in-out before:duration-700 before:absolute before:bg-blue-100
-                          before:origin-center before:h-[2px] before:w-0 hover:before:w-[50%] before:bottom-[-8px] 
-                          before:left-[50%] after:transition-[width] after:ease-in-out after:duration-700 after:absolute 
-                          after:bg-blue-100 after:origin-center after:h-[2px] after:w-0 hover:after:w-[50%] after:bottom-[-8px] after:right-[50%]`}
+                        }`}
                       >
                         EURO STOXX 50
                       </button>
                     </h1>
-
                     <h1 className="text-xl font-[DM Sans] px-28">
                       <button
                         onClick={() => {
                           setActiveTab("SMI (OSMI)");
                           scrollToMain();
                         }}
-                        className={`${
+                        className={`title-hover ${
                           activeTab === "SMI (OSMI)"
-                            ? "underline underline-offset-[12px] decoration-[0.15rem] text-blue-100 text-shadow"
+                            ? "underline underline-offset-[12px] decoration-[0.15rem] text-blue-100"
                             : "text-white"
-                        } hover:text-blue-100 text-shadow border-hidden relative 
-                          cursor-pointer transition-all ease-in-out before:transition-[width] 
-                          before:ease-in-out before:duration-700 before:absolute before:bg-blue-100
-                          before:origin-center before:h-[2px] before:w-0 hover:before:w-[50%] before:bottom-[-8px] 
-                          before:left-[50%] after:transition-[width] after:ease-in-out after:duration-700 after:absolute 
-                          after:bg-blue-100 after:origin-center after:h-[2px] after:w-0 hover:after:w-[50%] after:bottom-[-8px] after:right-[50%]`}
+                        }`}
                       >
                         Swiss Market Index
                       </button>
                     </h1>
-
                     <h1 className="text-xl font-[DM Sans] px-28 mr-24">
                       <button
                         onClick={() => {
                           scrollToFAQ();
                         }}
-                        className={`${
+                        className={`title-hover ${
                           activeTab === "FAQ"
-                            ? "underline underline-offset-[12px] decoration-[0.15rem] text-blue-100 text-shadow"
+                            ? "underline underline-offset-[12px] decoration-[0.15rem] text-blue-100"
                             : "text-white"
-                        } hover:text-blue-100 text-shadow border-hidden relative 
-                              cursor-pointer transition-all ease-in-out before:transition-[width] 
-                              before:ease-in-out before:duration-700 before:absolute before:bg-blue-100
-                              before:origin-center before:h-[2px] before:w-0 hover:before:w-[50%] before:bottom-[-8px] 
-                              before:left-[50%] after:transition-[width] after:ease-in-out after:duration-700 after:absolute 
-                              after:bg-blue-100 after:origin-center after:h-[2px] after:w-0 hover:after:w-[50%] after:bottom-[-8px] after:right-[50%]`}
+                        }`}
                       >
                         FAQ
                       </button>

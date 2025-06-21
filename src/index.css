@@ -15,3 +15,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@layer components {
+  .title-hover {
+    @apply relative hover:text-blue-100 text-shadow border-hidden cursor-pointer transition-all ease-in-out;
+    @apply before:pointer-events-none after:pointer-events-none;
+    @apply before:transition-[width] before:ease-in-out before:duration-700 before:absolute before:bg-blue-100;
+    @apply before:origin-center before:h-[2px] before:w-0 hover:before:w-[50%] before:bottom-[-8px] before:left-[50%];
+    @apply after:transition-[width] after:ease-in-out after:duration-700 after:absolute after:bg-blue-100;
+    @apply after:origin-center after:h-[2px] after:w-0 hover:after:w-[50%] after:bottom-[-8px] after:right-[50%];
+  }
+}
+
