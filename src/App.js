@@ -37,16 +37,16 @@ function App() {
           }}
         >
           <header className="fixed top-0 left-0 w-full z-50 pt-8 pl-8 pr-8 pb-8 backdrop-blur-3xl bg-transparent border-b border-gray-400 border-opacity-30">
-              <div className="container mx-auto flex items-center justify-center space-x-[0px]">
+              <div className="w-full px-4">
                 <nav>
-                  <ul className="flex divide-x divide-gray-400">
-                    <h1 className="text-xl font-[DM Sans] px-28">
+                  <ul className="flex flex-col sm:flex-row sm:justify-between w-full max-w-6xl mx-auto items-center text-center space-y-4 sm:space-y-0">
+                    <li className="flex-1 py-0.3 px-4 sm:border-r border-gray-400">
                       <button
                         onClick={() => {
                           setActiveTab("ESTX50 (OESX)");
                           scrollToMain();
                         }}
-                        className={`title-hover ${
+                        className={`text-base sm:text-lg md:text-xl font-[DM Sans] text-center title-hover ${
                           activeTab === "ESTX50 (OESX)"
                             ? "underline underline-offset-[12px] decoration-[0.15rem] text-blue-100"
                             : "text-white"
@@ -54,14 +54,14 @@ function App() {
                       >
                         EURO STOXX 50
                       </button>
-                    </h1>
-                    <h1 className="text-xl font-[DM Sans] px-28">
+                    </li>
+                    <li className="flex-1 py-0.3 px-4 sm:border-r border-gray-400">
                       <button
                         onClick={() => {
                           setActiveTab("SMI (OSMI)");
                           scrollToMain();
                         }}
-                        className={`title-hover ${
+                        className={`text-base sm:text-lg md:text-xl font-[DM Sans] text-center title-hover ${
                           activeTab === "SMI (OSMI)"
                             ? "underline underline-offset-[12px] decoration-[0.15rem] text-blue-100"
                             : "text-white"
@@ -69,13 +69,13 @@ function App() {
                       >
                         Swiss Market Index
                       </button>
-                    </h1>
-                    <h1 className="text-xl font-[DM Sans] px-28 mr-24">
+                    </li>
+                    <li className="flex-1 py-0.3 px-4 sm:-ml-8 md:-ml-12 md:mr-16 lg:-ml-16">
                       <button
                         onClick={() => {
                           scrollToFAQ();
                         }}
-                        className={`title-hover ${
+                        className={`text-base sm:text-lg md:text-xl font-[DM Sans] text-center title-hover ${
                           activeTab === "FAQ"
                             ? "underline underline-offset-[12px] decoration-[0.15rem] text-blue-100"
                             : "text-white"
@@ -83,13 +83,13 @@ function App() {
                       >
                         FAQ
                       </button>
-                    </h1>
+                    </li>                      
                   </ul>
                 </nav>
             </div>
           </header>
 
-          <main id="main-content" className="pt-[120px] pb-24">
+          <main id="main-content" className="pt-48 sm:pt-40 lg:pt-[120px] pb-24">
             <InterestOverTimeChart endpoint={endpoint} instrument={activeTab} />
           </main>
         </div>

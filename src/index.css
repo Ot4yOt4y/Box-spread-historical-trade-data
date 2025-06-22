@@ -25,5 +25,10 @@ code {
     @apply after:transition-[width] after:ease-in-out after:duration-700 after:absolute after:bg-blue-100;
     @apply after:origin-center after:h-[2px] after:w-0 hover:after:w-[50%] after:bottom-[-8px] after:right-[50%];
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
 }
 
