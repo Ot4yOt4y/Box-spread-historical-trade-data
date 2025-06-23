@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -90,25 +90,39 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
     setSelectedExpiration("All");
     setDaysBack(maxDaysBack.toString());
     
-      //calculate lowest and highest days for new duration based on maxdaysback
-      const now = new Date();
-      const earliestDate = new Date();
-      earliestDate.setDate(now.getDate() - maxDaysBack);
+    //calculate lowest and highest days for new duration based on maxdaysback
+    const now = new Date();
+    const earliestDate = new Date();
+    earliestDate.setDate(now.getDate() - maxDaysBack);
 
-      const filterBasedOnDays = rawData.filter((item) => {
-        const tradeDate = getCombinedDateTime(item.date, item.trdtime);
-        return tradeDate >= earliestDate;
-      });
+    const filterBasedOnDays = rawData.filter((item) => {
+      const tradeDate = getCombinedDateTime(item.date, item.trdtime);
+      return tradeDate >= earliestDate;
+    });
 
-      const filteredByExp = filterBasedOnDays;
+    const filteredByExp = filterBasedOnDays;
 
-      const durations = filteredByExp.map((item) => item.contract_duration);
-      const newMin = Math.min(...durations);
-      const newMax = Math.max(...durations);
+    const durations = filteredByExp.map((item) => item.contract_duration);
+    const newMin = Math.min(...durations);
+    const newMax = Math.max(...durations);
 
-      setDurationBounds([newMin, newMax]);
-      setDurationRange([newMin, newMax]);  
-    };
+    setDurationBounds([newMin, newMax]);
+    setDurationRange([newMin, newMax]);  
+  };
+
+  //for resizing graph
+  const chartRef = useRef(null);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+  const resizeChart = () => {
+    if (chartRef.current) {
+      chartRef.current.resize();
+    }
+  };
+  window.addEventListener("resize", resizeChart);
+    return () => window.removeEventListener("resize", resizeChart);
+  }, []);
 
   //fetches box spread data when endpoint changes
   useEffect(() => {
@@ -310,7 +324,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             });
             const year = dateObj.getFullYear();
             if (index === 0 || dateObj.getMonth() === 0) {
-              return `${year} ${monthName}`;
+              return `${year}`;
             }
             return monthName;
           },
@@ -345,7 +359,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
         },
         padding: {
           top: 8,
-          bottom: 15,
+          bottom: 12,
         },
       },
       tooltip: {
@@ -376,14 +390,22 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
     },
   };
 
-  if (loading) return <div></div>;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <div className="spinner" />
+      </div>
+    );
+  }
   if (error) return <div>Error: {error}</div>;
   if (!chartData) return <div></div>;
 
   return (
-    <div className="max-w-[1150px] mx-auto">
-      <Line data={chartData} options={options} />
-      <div className="flex flex-col space-y-6 mt-10">
+    <div className="max-w-[1500px] mx-auto" ref={containerRef}>
+      <div className="max-w-[1150px] mx-auto bg-[#00142c] bg-opacity-0 border-none border-t border-l border-r border-black p-4 mb-2">
+        <Line ref={chartRef} data={chartData} options={options} />
+      </div>
+      <div className="flex flex-col space-y-6 bg-[#00142c] bg-opacity-0 border-t border-b border-black mx-auto p-4 mb-8 max-w-[1150px]">
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center space-x-3">          
           <label htmlFor="showDaysBack" className="text-white">
@@ -408,7 +430,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
           <div className="flex pr-2">
             <button
               onClick={resetAllFilters}
-              className="text-sm bg-[#ffffff26] text-white px-2 py-1 hover:text-red-600 hover:bg-[#26364b] transition duration-300"
+              className="text-sm bg-[#ffffff26] text-white px-2 py-1 hover:text-red-600 hover:bg-[#26364b] transition duration-300 ml-12"
             >
               Reset Filter
             </button>
