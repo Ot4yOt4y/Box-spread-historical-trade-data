@@ -35,8 +35,8 @@ def get_estx50_box_spreads():
             trdtime,
             contract_duration,
             lower_strike,
-            higher_strike
-            
+            higher_strike,
+            volume
         FROM box_spreads 
         WHERE instrument LIKE 'OESX'
     """)
@@ -94,7 +94,8 @@ def get_smi_box_trades():
             trdtime,
             contract_duration,
             lower_strike,
-            higher_strike
+            higher_strike,
+            volume
         FROM box_spreads 
         WHERE instrument LIKE 'OSMI'
 

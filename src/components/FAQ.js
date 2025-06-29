@@ -49,7 +49,7 @@ const FAQ = () => {
         {
       question: "Why are the spreads so wide on trades shown in the graph?",
       answer:
-        "The trades displayed are from off-order-book executions, such as negotiated block trades or complex multi-leg strategies executed directly through EUREX. Importantly, off-order-book trades generally align with where the market stands on the order book. The wider-looking spreads typically result from how the trades are packaged and executed, not necessarily from market inefficiency.",
+        "The trades displayed are from off-order-book executions, such as negotiated block trades or complex multi-leg strategies executed directly through EUREX. Importantly, off-order-book trades generally align with where the market stands on the order book. The wider spreads typically result from how the trades are packaged and executed.",
     },
   ];
 

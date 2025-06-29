@@ -269,8 +269,12 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
         contract_duration: spread.contract_duration,
         lower_strike: spread.lower_strike,
         higher_strike: spread.higher_strike,
+        volume: spread.volume,
+        loan_amount: (spread.higher_strike-spread.lower_strike)*10*spread.volume
       };
     });
+
+    //console.log("chart points:", chartPoints[0]);
 
     //selects instrument name from first data point
     if (chartPoints.length > 0) {
@@ -366,12 +370,20 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
         callbacks: {
           label: function (context) {
             const dataPoint = context.raw;
+            var currency;
+            if (dataPoint.instrument === "EURO STOXX 50 (OESX)") {
+              currency = 'EUR';
+            } else {
+              currency = 'CHF'
+            }
             return [
               `Index (instrument): ${dataPoint.instrument}`,
               `Annualized Interest Rate(%): ${dataPoint.y.toFixed(3)}`,
               `Contract Duration: ${dataPoint.contract_duration} days`,
               `Lower Strike: ${dataPoint.lower_strike}`,
               `Higher Strike: ${dataPoint.higher_strike}`,
+              `Volume: ${dataPoint.volume}`,
+              `Loan Amount: ${dataPoint.loan_amount} ${currency}`
             ];
           },
         },
