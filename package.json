@@ -4,6 +4,9 @@
   "homepage": "https://ot4yot4y.github.io/Box-spread-trades-history",
   "private": true,
   "dependencies": {
+    "@fontsource/inter": "^5.2.6",
+    "@fontsource/open-sans": "^5.2.6",
+    "@fontsource/roboto": "^5.2.6",
     "@tailwindcss/postcss": "^4.0.17",
     "@tailwindcss/vite": "^4.0.17",
     "@testing-library/dom": "^10.4.0",

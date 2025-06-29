@@ -6,6 +6,11 @@ module.exports = {
     extend: {
        borderWidth: {
         '0.5': '0.5px',
+      },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        opensans: ['"Open Sans"', 'sans-serif']
       }
     },
   },

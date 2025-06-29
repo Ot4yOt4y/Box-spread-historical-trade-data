@@ -46,7 +46,7 @@ function App() {
                           setActiveTab("ESTX50 (OESX)");
                           scrollToMain();
                         }}
-                        className={`text-base sm:text-lg md:text-xl font-[DM Sans] text-center title-hover ${
+                        className={`text-base sm:text-lg md:text-xl text-center title-hover ${
                           activeTab === "ESTX50 (OESX)"
                             ? "active-title"
                             : "text-white"
@@ -61,7 +61,7 @@ function App() {
                           setActiveTab("SMI (OSMI)");
                           scrollToMain();
                         }}
-                        className={`text-base sm:text-lg md:text-xl font-[DM Sans] text-center title-hover ${
+                        className={`text-base sm:text-lg md:text-xl text-center title-hover ${
                           activeTab === "SMI (OSMI)"
                             ? "active-title"
                             : "text-white"
@@ -75,7 +75,7 @@ function App() {
                         onClick={() => {
                           scrollToFAQ();
                         }}
-                        className={`text-base sm:text-lg md:text-xl font-[DM Sans] text-center title-hover ${
+                        className={`text-base sm:text-lg md:text-xl text-center title-hover ${
                           activeTab === "FAQ"
                             ? "active-title"
                             : "text-white"

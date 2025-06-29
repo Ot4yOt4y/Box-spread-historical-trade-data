@@ -401,8 +401,8 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   if (!chartData) return <div></div>;
 
   return (
-    <div className="max-w-[1500px] mx-auto" ref={containerRef}>
-      <div className="max-w-[1150px] mx-auto bg-[#00142c] bg-opacity-0 border-none border-t border-l border-r border-black p-4 mb-2">
+    <div className="w-[80%] mx-auto" ref={containerRef}>
+      <div className="mx-auto bg-[#00142c] bg-opacity-0 border-none border-t border-l border-r border-black p-4 mb-2">
         <Line ref={chartRef} data={chartData} options={options} />
       </div>
       <div className="flex flex-col space-y-6 bg-[#00142c] bg-opacity-0 border-t border-b border-black mx-auto p-4 mb-8 max-w-[1150px]">
@@ -423,14 +423,14 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             }}
             min={1}
             max={maxDaysBack}
-            className="bg-[#ffffff26] border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none w-16 text-center"
+            className="bg-[#ffffff26] rounded-sm border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none w-16 text-center"
           />
           <span className="text-white">days</span>
           </div>
           <div className="flex pr-2">
             <button
               onClick={resetAllFilters}
-              className="text-sm bg-[#ffffff26] text-white px-2 py-1 hover:text-red-600 hover:bg-[#26364b] transition duration-300 ml-12"
+              className="text-sm bg-[#ffffff26] rounded-sm text-white px-2 py-1 hover:text-red-600 hover:bg-[#26364b] transition duration-300 ml-12"
             >
               Reset Filter
             </button>
@@ -448,7 +448,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             id="expirationFilter"
             value={selectedExpiration}
             onChange={(e) => setSelectedExpiration(e.target.value)}
-            className="bg-[#ffffff26] h-8 pb-0.5 px-2 border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none focus:bg-[#26364b]"
+            className="bg-[#ffffff26] h-8 pb-0.5 px-2 rounded-sm border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none focus:bg-[#26364b]"
           >
             <option value="All">All</option>
             {expirationOptions.map((exp, index) => (
