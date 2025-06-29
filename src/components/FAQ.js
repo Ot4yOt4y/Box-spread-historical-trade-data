@@ -39,7 +39,7 @@ const FAQ = () => {
     {
       question: "How often is the data updated?",
       answer:
-        "",
+        "The box spreads trade data on the graph is updated daily at 12 AM (CET) for the previous trading day.",
     },
     {
       question: "How is the interest rate of a box spread calculated?",
