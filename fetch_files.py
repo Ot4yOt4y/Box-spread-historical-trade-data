@@ -44,6 +44,12 @@ def download_file(url):
 
     print(f"Downloading: {filename}")
     
+    r = requests.get(url, headers=HEADERS)
+    r.raise_for_status()
+
+    with open(path, "wb") as file:
+        file.write(r.content)
+    
 
 def main():
     links = get_full_csv_url()

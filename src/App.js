@@ -39,7 +39,7 @@ function App() {
           <header className="fixed top-0 left-0 w-full z-50 bg-transparent">
             <div className="w-[80%] mx-auto border-b border-gray-400 border-opacity-30 backdrop-blur-3xl">
               <nav>
-                <ul className="w-[50%] flex flex-col sm:flex-row justify-between items-center mx-auto py-8 gap-y-4 sm:gap-y-0 text-center">
+                <ul className="w-[60%] flex flex-col sm:flex-row justify-between items-center mx-auto py-6 gap-y-4 sm:gap-y-0 text-center">                    
                     <li className="px-2 flex-1 text-center">
                       <button
                         onClick={() => {
@@ -70,7 +70,7 @@ function App() {
                         Swiss Market Index
                       </button>
                     </li>
-                    <li className="px-1 lg:-ml-12 lg:mr-12 md:-ml-9 md:mr-9 sm:-ml-6 sm:mr-6 flex-1 text-center">
+                    <li className="px-1 lg:-ml-12 lg:mr-16 md:-ml-9 md:mr-9 sm:-ml-6 sm:mr-6 flex-1 text-center">
                       <button
                         onClick={() => {
                           scrollToFAQ();
@@ -91,7 +91,7 @@ function App() {
 
           <div className="w-full">
             <div className="w-[80%] mx-auto bg-[#010b1b] bg-opacity-60 px-4 sm:px-8">
-              <main id="main-content" className="pt-48 sm:pt-40 lg:pt-[105px] pb-24">
+              <main id="main-content" className="pt-40 sm:pt-36 md:pt-32 lg:pt-[95px] pb-24">
                 <InterestOverTimeChart endpoint={endpoint} instrument={activeTab} />
               </main>
             </div>

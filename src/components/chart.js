@@ -70,7 +70,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   const [selectedExpiration, setSelectedExpiration] = useState("All");
   const [durationRange, setDurationRange] = useState([0, 100]);
   const [durationBounds, setDurationBounds] = useState([0, 100]);
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [displayInstrumentName, setInstrumentName] = useState("");
   const [daysOnHover, setDays] = useState(null);
@@ -127,7 +127,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   //fetches box spread data when endpoint changes
   useEffect(() => {
     async function fetchData() {
-      setLoading(true);
+      //setLoading(true);
       try {
         const response = await fetch(endpoint);
         if (!response.ok) {
@@ -170,7 +170,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
       } catch (error) {
         setError(error.message);
       } finally {
-        setLoading(false);
+        //setLoading(false);
       }
     }
     fetchData();
@@ -269,8 +269,8 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
         contract_duration: spread.contract_duration,
         lower_strike: spread.lower_strike,
         higher_strike: spread.higher_strike,
-        volume: spread.volume,
-        loan_amount: (spread.higher_strike-spread.lower_strike)*10*spread.volume
+        //volume: spread.volume,
+        //loan_amount: (spread.higher_strike-spread.lower_strike)*10*spread.volume
       };
     });
 
@@ -340,9 +340,10 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
       },
       y: {
         min: 0,
-        max: 5,
+        max: 6,
         ticks: {
           color: "gray",
+          stepSize: 0.5
         },
         grid: {
           color: "black",
@@ -370,20 +371,22 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
         callbacks: {
           label: function (context) {
             const dataPoint = context.raw;
+            /*
             var currency;
             if (dataPoint.instrument === "EURO STOXX 50 (OESX)") {
               currency = 'EUR';
             } else {
               currency = 'CHF'
             }
+            */
             return [
               `Index (instrument): ${dataPoint.instrument}`,
-              `Annualized Interest Rate(%): ${dataPoint.y.toFixed(3)}`,
+              `Annualized Interest Rate: ${dataPoint.y.toFixed(2)}%`,
               `Contract Duration: ${dataPoint.contract_duration} days`,
               `Lower Strike: ${dataPoint.lower_strike}`,
               `Higher Strike: ${dataPoint.higher_strike}`,
-              `Volume: ${dataPoint.volume}`,
-              `Loan Amount: ${dataPoint.loan_amount} ${currency}`
+              //`Volume: ${dataPoint.volume}`,
+              //`Loan Amount: ${dataPoint.loan_amount} ${currency}`
             ];
           },
         },
@@ -401,7 +404,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
       },
     },
   };
-
+  /*
   if (loading) {
     return (
       <div className="flex items-center justify-center h-96">
@@ -409,18 +412,27 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
       </div>
     );
   }
+  */
   if (error) return <div>Error: {error}</div>;
   if (!chartData) return <div></div>;
 
+   const filterIsDefault = (
+    selectedExpiration === "All" &&
+    parseInt(showDaysBack) === maxDaysBack &&
+    durationRange[0] === durationBounds[0] &&
+    durationRange[1] === durationBounds[1]
+  );
+
+
   return (
     <div className="w-[80%] mx-auto" ref={containerRef}>
-      <div className="mx-auto bg-[#00142c] bg-opacity-0 border-none border-t border-l border-r border-black p-4 mb-2">
+      <div className="mx-auto bg-[#00142c] bg-opacity-0 p-4 mb-4">
         <Line ref={chartRef} data={chartData} options={options} />
       </div>
-      <div className="flex flex-col space-y-6 bg-[#00142c] bg-opacity-0 border-t border-b border-black mx-auto p-4 mb-8 max-w-[1150px]">
+      <div className="w-[100%] flex flex-col space-y-6 bg-[#00142c] bg-opacity-0 border-opacity-50 border-t-[2px] border-b-[2px] border-black mx-auto p-4 mb-8">
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center space-x-3">          
-          <label htmlFor="showDaysBack" className="text-white">
+          <label htmlFor="showDaysBack" className="text-white font-medium">
             Show trades from past:
           </label>
           <input
@@ -442,9 +454,11 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
           <div className="flex pr-2">
             <button
               onClick={resetAllFilters}
-              className="text-sm bg-[#ffffff26] rounded-sm text-white px-2 py-1 hover:text-red-600 hover:bg-[#26364b] transition duration-300 ml-12"
-            >
-              Reset Filter
+              disabled={filterIsDefault}
+                className={`text-sm rounded-sm text-red-800 px-2 py-1 underline underline-offset-4 hover:border-blue-100 ml-12 ${
+                  filterIsDefault ? "opacity-70" : "hover:font-medium transition duration-300"
+                }`}
+              > Reset filters
             </button>
           </div>
         </div>
@@ -452,7 +466,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
           <div className="flex items-center space-x-3">
           <label
             htmlFor="expirationFilter"
-            className="text-white"
+            className="text-white font-medium"
           >
             Filter by expiration date:
           </label>
@@ -476,7 +490,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
           </div>
         </div>
         <div className="flex items-start space-x-4 w-full mt-6">
-          <label className="text-white whitespace-nowrap">
+          <label className="text-white whitespace-nowrap font-medium">
             Filter by contract duration:
           </label>
           <div className="flex flex-col w-full items-center pt-1.5 pl-2 pr-4">
