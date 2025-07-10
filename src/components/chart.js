@@ -455,7 +455,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             <button
               onClick={resetAllFilters}
               disabled={filterIsDefault}
-                className={`text-sm rounded-sm text-red-800 px-2 py-1 underline underline-offset-4 hover:border-blue-100 ml-12 ${
+                className={`text-sm rounded-sm text-red-800 px-2 py-1 underline underline-offset-4 hover:border-blue-100${
                   filterIsDefault ? "opacity-70" : "hover:font-medium transition duration-300"
                 }`}
               > Reset filters
@@ -489,11 +489,11 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
           </select>
           </div>
         </div>
-        <div className="flex items-start space-x-4 w-full mt-6">
-          <label className="text-white whitespace-nowrap font-medium">
-            Filter by contract duration:
-          </label>
-          <div className="flex flex-col w-full items-center pt-1.5 pl-2 pr-4">
+       <div className="flex flex-col sm:flex-row sm:items-start sm:space-x-4 w-full mt-6 space-y-2 sm:space-y-0">
+        <label className="text-white whitespace-nowrap font-medium">
+          Filter by contract duration:
+        </label>
+          <div className="flex flex-col w-full items-center sm:items-start pt-1.5 px-0 sm:px-2">
             <div
               ref={sliderRef}
               className="relative w-full"
