@@ -493,7 +493,8 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
         <label className="text-white whitespace-nowrap font-medium">
           Filter by contract duration:
         </label>
-          <div className="flex flex-col w-full items-center sm:items-start pt-1.5 px-0 sm:px-2">
+        <div className="flex flex-col w-full items-center sm:items-start pt-1.5 px-0 sm:px-2">
+          <div className="w-full flex flex-col items-center self-center">
             <div
               ref={sliderRef}
               className="relative w-full"
@@ -530,6 +531,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             <div className="text-white mt-1 text-sm text-center">
               {`Contract Duration: ${durationRange[0]} - ${durationRange[1]} days`}
             </div>
+          </div>
           </div>
         </div>
       </div>
