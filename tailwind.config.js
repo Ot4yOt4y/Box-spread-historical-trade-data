@@ -11,7 +11,16 @@ module.exports = {
         inter: ['Inter', 'sans-serif'],
         roboto: ['Roboto', 'sans-serif'],
         opensans: ['"Open Sans"', 'sans-serif']
-      }
+      },
+      screens: {
+        'md-lg': '800px', 
+        'md-lg-main': '1300px',
+        'md-lg-main-1': '1400px',
+        'md-lg-main1': '1500px',
+        'md-lg-main-1-2':'1600px',
+        'md-lg-main-2': '1700px',
+        'md-lg-main2': '1800px'
+      },
     },
   },
   plugins: [

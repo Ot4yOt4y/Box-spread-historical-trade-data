@@ -4,6 +4,7 @@ import FAQ from "./components/FAQ";
 
 function App() {
   const [activeTab, setActiveTab] = useState("ESTX50 (OESX)");
+  const [showHamburgerMenu, setshowHamburgerMenu] = useState(false);
 
   let endpoint;
     if (activeTab === "ESTX50 (OESX)") {
@@ -37,16 +38,18 @@ function App() {
           }}
         >
           <header className="fixed top-0 left-0 w-full z-50 bg-transparent">
-            <div className="w-[80%] mx-auto border-b border-gray-400 border-opacity-30 backdrop-blur-3xl">
-              <nav>
-                <ul className="w-[60%] flex flex-col sm:flex-row justify-between items-center mx-auto py-6 gap-y-4 sm:gap-y-0 text-center">                    
-                    <li className="px-2 flex-1 text-center">
+            <div className="md-lg:w-[100%] md-lg-main2:w-[83%] mx-auto border-b border-gray-400 border-opacity-30 backdrop-blur-3xl">
+              <nav className="relative">
+                <div className="hidden md-lg-main2:flex justify-between items-center mx-auto py-6 md-lg-main2:w-[77%] md-lg-main-2:w-[65%] md-lg-main-1-2:w-[69%] md-lg-main1:w-[71%] md-lg-main-1:w-[76%] md-lg-main:w-[80%] md:w-[84%]">
+                  <div className="flex w-full items-center md-lg-main2:gap-16">
+                    <div className="text-xl text-white space">Box Spread - Historical trade data</div>
+                    <div className="flex md-lg-main2:space-x-16 ml-auto pr-8">
                       <button
                         onClick={() => {
                           setActiveTab("ESTX50 (OESX)");
                           scrollToMain();
                         }}
-                        className={`text-base sm:text-lg md:text-xl text-center title-hover ${
+                          className={`text-sm sm:text-base md:text-lg title-hover ${
                           activeTab === "ESTX50 (OESX)"
                             ? "active-title"
                             : "text-white"
@@ -54,14 +57,12 @@ function App() {
                       >
                         EURO STOXX 50
                       </button>
-                    </li>
-                    <li className="px-2 flex-1 text-center">
                       <button
                         onClick={() => {
                           setActiveTab("SMI (OSMI)");
                           scrollToMain();
                         }}
-                        className={`text-base sm:text-lg md:text-xl text-center title-hover ${
+                          className={`text-sm sm:text-base md:text-lg title-hover ${
                           activeTab === "SMI (OSMI)"
                             ? "active-title"
                             : "text-white"
@@ -69,13 +70,11 @@ function App() {
                       >
                         Swiss Market Index
                       </button>
-                    </li>
-                    <li className="px-1 lg:-ml-12 lg:mr-16 md:-ml-9 md:mr-9 sm:-ml-6 sm:mr-6 flex-1 text-center">
                       <button
                         onClick={() => {
                           scrollToFAQ();
                         }}
-                        className={`text-base sm:text-lg md:text-xl text-center title-hover ${
+                          className={`text-sm sm:text-base md:text-lg title-hover ${
                           activeTab === "FAQ"
                             ? "active-title"
                             : "text-white"
@@ -83,22 +82,88 @@ function App() {
                       >
                         FAQ
                       </button>
-                    </li> 
-                </ul>
+                    </div>
+                  </div> 
+                </div>
+
+                <div className="md-lg-main2:hidden flex justify-start px-4 py-4">
+                  <button
+                    onClick={() => setshowHamburgerMenu((prev) => !prev)}
+                    className="text-white focus:outline-none"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  </button>
+                </div>
+
+                {showHamburgerMenu && (
+                <div className="relative before:content-[''] before:absolute before:inset-0 before:-z-10 before:backdrop-blur-3xl border-b border-gray-400 border-opacity-30 z-50">
+                    <ul className="py-4 flex flex-col items-start space-y-2 pl-5">
+                      <li>
+                        <button
+                          onClick={() => {
+                            setActiveTab("ESTX50 (OESX)");
+                            scrollToMain();
+                            setshowHamburgerMenu(false);
+                          }}
+                          className={`text-sm sm:text-base md:text-lg hover:hamburger-title ${
+                            activeTab === "ESTX50 (OESX)"
+                              ? "hamburger-title"
+                              : "text-white"
+                          }`}
+                        >
+                          EURO STOXX 50
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          onClick={() => {
+                            setActiveTab("SMI (OSMI)");
+                            scrollToMain();
+                            setshowHamburgerMenu(false);
+                          }}
+                          className={`text-sm sm:text-base md:text-lg hover:hamburger-title ${
+                            activeTab === "SMI (OSMI)"
+                              ? "hamburger-title"
+                              : "text-white"
+                          }`}
+                        >
+                          Swiss Market Index
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          onClick={() => {
+                            scrollToFAQ();
+                            setshowHamburgerMenu(false);
+                          }}
+                          className={`text-sm sm:text-base md:text-lg hover:hamburger-title ${
+                            activeTab === "FAQ"
+                              ? "hamburger-title"
+                              : "text-white"
+                          }`}
+                        >
+                          FAQ
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </nav>
             </div>
           </header>
 
           <div className="w-full">
-            <div className="w-[80%] mx-auto bg-[#010b1b] bg-opacity-60 px-4 sm:px-8">
-              <main id="main-content" className="pt-40 sm:pt-36 md:pt-32 lg:pt-[95px] pb-24">
+            <div className="md-lg:w-[100%] md-lg-main2:w-[83%] mx-auto bg-[#010b1b] bg-opacity-60 px-4 sm:px-8">
+              <main id="main-content" className="pt-24 pb-24">
                 <InterestOverTimeChart endpoint={endpoint} instrument={activeTab} />
               </main>
             </div>
           </div>
 
           <div className="w-full">
-            <div className="w-[80%] mx-auto bg-[#00050d] bg-opacity-50 px-4 sm:px-8">
+            <div className="md-lg:w-[100%] md-lg-main2:w-[83%] mx-auto bg-[#00050d] bg-opacity-50 px-4 sm:px-8">
               <section id="faq-section" className="scroll-mt-8">
                 <FAQ />
               </section>
@@ -106,7 +171,7 @@ function App() {
           </div>
 
           <div className="w-full">
-            <div className="w-[80%] mx-auto bg-[#00050d] bg-opacity-50">
+            <div className="md-lg:w-[100%] md-lg-main2:w-[83%] mx-auto bg-[#00050d] bg-opacity-50">
               <footer className="text-center text-xs text-gray-400 pt-4 pb-4 backdrop-blur-3xl bg-transparent border-t border-gray-400 border-opacity-30">
                 <div className="flex items-center justify-center space-x-1">
                   <svg

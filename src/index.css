@@ -34,6 +34,10 @@ code {
     @apply after:absolute after:bg-blue-100 after:h-[2px] after:w-[50%] after:bottom-[-6px] after:right-[50%];
   }
 
+  .hamburger-title {
+    @apply relative text-blue-100 text-shadow font-semibold;
+  }
+
   html {
     scroll-behavior: smooth;
   }

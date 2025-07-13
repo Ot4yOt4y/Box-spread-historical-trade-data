@@ -425,11 +425,11 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
 
 
   return (
-    <div className="w-[80%] mx-auto" ref={containerRef}>
+    <div className="md-lg-main2:w-[83%] md-lg-main-2:w-[68%] md-lg-main-1-2:w-[72%] md-lg-main1:w-[75%] md-lg-main-1:w-[80%] md-lg-main:w-[85%] md:w-[90%] mx-auto" ref={containerRef}>
       <div className="mx-auto bg-[#00142c] bg-opacity-0 p-4 mb-4">
-        <Line ref={chartRef} data={chartData} options={options} />
+        <Line ref={chartRef} data={chartData} options={options} height={140}/>
       </div>
-      <div className="w-[100%] flex flex-col space-y-6 bg-[#00142c] bg-opacity-0 border-opacity-50 border-t-[2px] border-b-[2px] border-black mx-auto p-4 mb-8">
+      <div className="w-[98%] flex flex-col space-y-6 bg-[#00142c] bg-opacity-0 border-opacity-50 border-t-[2px] border-b-[2px] border-black mx-auto pt-4 pb-4 mb-8">
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center space-x-3">          
           <label htmlFor="showDaysBack" className="text-white font-medium">
