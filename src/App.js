@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InterestOverTimeChart from "./components/chart";
 import FAQ from "./components/FAQ";
 
@@ -26,6 +26,18 @@ function App() {
       chartSection.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1800) {
+        setshowHamburgerMenu(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
 
   return (
     <div className="min-h-screen flex flex-col bg-[url(/public/background.jpeg)] bg-cover bg-center bg-no-repeat bg-fixed">
