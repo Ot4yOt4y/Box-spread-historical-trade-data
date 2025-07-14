@@ -429,9 +429,9 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
       <div className="mx-auto bg-[#00142c] bg-opacity-0 p-4 mb-4">
         <Line ref={chartRef} data={chartData} options={options} height={140}/>
       </div>
-      <div className="w-[98%] flex flex-col space-y-6 bg-[#00142c] bg-opacity-0 border-opacity-50 border-t-[2px] border-b-[2px] border-black mx-auto pt-4 pb-4 mb-8">
+      <div className="w-[98%] flex flex-col reset-on-top:space-y-6 space-y-8 bg-[#00142c] bg-opacity-0 border-opacity-50 border-t-[2px] border-b-[2px] border-black mx-auto pt-4 pb-4 mb-8">
       <div className="flex flex-col reset-on-top:flex-row-reverse reset-on-top:items-center reset-on-top:justify-between w-full">
-        <div className="flex justify-start reset-on-top:justify-end reset-on-top:pr-2 mb-4 reset-on-top:mb-0">
+        <div className="flex justify-start reset-on-top:justify-end reset-on-top:pr-2 mb-8 reset-on-top:mb-0">
           <button
             onClick={resetAllFilters}
             disabled={filterIsDefault}
@@ -492,7 +492,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
         <label className="text-white whitespace-nowrap font-medium">
           Filter by contract duration:
         </label>
-        <div className="flex flex-col w-full items-center sm:items-start pt-1.5 px-0 sm:px-2">
+        <div className="flex flex-col w-full items-center sm:items-start sm:pt-1.5 px-0 px-2">
           <div className="w-full flex flex-col items-center self-center">
             <div
               ref={sliderRef}
