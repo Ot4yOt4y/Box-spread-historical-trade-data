@@ -175,7 +175,7 @@ function App() {
           </div>
 
           <div className="w-full">
-            <div className="w-[100%] mx-auto bg-[#00050d] bg-opacity-50 px-4 sm:px-8">
+            <div className="w-[100%] mx-auto bg-[#00050d] bg-opacity-30 px-4 sm:px-8">
               <section id="faq-section" className="scroll-mt-8">
                 <FAQ />
               </section>
@@ -183,7 +183,7 @@ function App() {
           </div>
 
           <div className="w-full">
-            <div className="w-[100%] mx-auto bg-[#00050d] bg-opacity-50">
+            <div className="w-[100%] mx-auto bg-[#00050d] bg-opacity-30">
               <footer className="text-center text-xs text-gray-400 pt-4 pb-4 backdrop-blur-3xl bg-transparent border-t border-gray-400 border-opacity-30">
                 <div className="flex items-center justify-center space-x-1">
                   <svg

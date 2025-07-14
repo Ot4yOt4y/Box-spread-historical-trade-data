@@ -344,10 +344,6 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
         ticks: {
           color: "gray",
           stepSize: 0.5,
-          callback: function (value) {
-            var remaining = Number(value) % 1;
-            return remaining === 0 ? "" : "";
-          },
         },
         grid: {
           color: "black",
