@@ -21,7 +21,7 @@ const FAQItem = ({ question, answer }) => {
       >
         <span className="text-lg font-medium text-white">{question}</span>
         <span
-          className={`text-2xl font-bold text-white transform transition-transform duration-300 ${
+          className={`text-2xl pl-12 font-bold text-white transform transition-transform duration-300 ${
             expanded ? "rotate-45" : ""
           }`}
         >

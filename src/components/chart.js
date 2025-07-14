@@ -343,7 +343,11 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
         max: 6,
         ticks: {
           color: "gray",
-          stepSize: 0.5
+          stepSize: 0.5,
+          callback: function (value) {
+            var remaining = Number(value) % 1;
+            return remaining === 0 ? "" : "";
+          },
         },
         grid: {
           color: "black",
@@ -425,7 +429,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
 
 
  return (
-    <div className="md-lg-main2:w-[83%] md-lg-main-2:w-[68%] md-lg-main-1-2:w-[72%] md-lg-main1:w-[75%] md-lg-main-1:w-[80%] md-lg-main:w-[85%] md:w-[90%] mx-auto" ref={containerRef}>
+    <div className="md-lg-main2:w-[68%] md-lg-main-2:w-[70%] md-lg-main-1-2:w-[76%] md-lg-main1:w-[80%] md-lg-main-1:w-[84%] lg:w-[86%] md:w-[92%] sm:w-[96%] mx-auto" ref={containerRef}>
       <div className="mx-auto bg-[#00142c] bg-opacity-0 p-4 mb-4">
         <Line ref={chartRef} data={chartData} options={options} height={140}/>
       </div>

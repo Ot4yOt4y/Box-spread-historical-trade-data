@@ -21,7 +21,7 @@ module.exports = {
         'md-lg-main1': '1500px',
         'md-lg-main-1-2':'1600px',
         'md-lg-main-2': '1700px',
-        'md-lg-main2': '1800px'
+        'md-lg-main2': '1900px'
       },
     },
   },
