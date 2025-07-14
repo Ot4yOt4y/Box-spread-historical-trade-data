@@ -424,72 +424,71 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
   );
 
 
-  return (
+ return (
     <div className="md-lg-main2:w-[83%] md-lg-main-2:w-[68%] md-lg-main-1-2:w-[72%] md-lg-main1:w-[75%] md-lg-main-1:w-[80%] md-lg-main:w-[85%] md:w-[90%] mx-auto" ref={containerRef}>
       <div className="mx-auto bg-[#00142c] bg-opacity-0 p-4 mb-4">
         <Line ref={chartRef} data={chartData} options={options} height={140}/>
       </div>
       <div className="w-[98%] flex flex-col space-y-6 bg-[#00142c] bg-opacity-0 border-opacity-50 border-t-[2px] border-b-[2px] border-black mx-auto pt-4 pb-4 mb-8">
-      <div className="flex items-center justify-between w-full">
-        <div className="flex items-center space-x-3">          
+      <div className="flex flex-col reset-on-top:flex-row-reverse reset-on-top:items-center reset-on-top:justify-between w-full">
+        <div className="flex justify-start reset-on-top:justify-end reset-on-top:pr-2 mb-4 reset-on-top:mb-0">
+          <button
+            onClick={resetAllFilters}
+            disabled={filterIsDefault}
+            className={`text-sm rounded-sm text-red-800 reset-on-top:px-1 underline underline-offset-4 hover:border-blue-100 ${
+              filterIsDefault ? "opacity-70" : "hover:font-medium transition duration-300"
+            }`}
+          > Reset filters
+          </button>
+        </div>
+        <div className="flex flex-col sm-md:flex-row sm-md:items-center sm-md:space-x-3 space-y-1 sm-md:space-y-0">
           <label htmlFor="showDaysBack" className="text-white font-medium">
             Show trades from past:
           </label>
-          <input
-            type="number"
-            id="daysBack"
-            value={showDaysBack}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val === "" || (/^\d+$/.test(val) && val.length <= 5 && parseInt(val) <= maxDaysBack)) {
-                setDaysBack(val);
-              }
-            }}
-            min={1}
-            max={maxDaysBack}
-            className="bg-[#ffffff26] rounded-sm border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none w-16 text-center"
-          />
-          <span className="text-white">days</span>
-          </div>
-          <div className="flex pr-2">
-            <button
-              onClick={resetAllFilters}
-              disabled={filterIsDefault}
-                className={`text-sm rounded-sm text-red-800 px-2 py-1 underline underline-offset-4 hover:border-blue-100${
-                  filterIsDefault ? "opacity-70" : "hover:font-medium transition duration-300"
-                }`}
-              > Reset filters
-            </button>
+          <div className="flex items-center space-x-2">
+            <input
+              type="number"
+              id="daysBack"
+              value={showDaysBack}
+              onChange={(e) => {
+                const val = e.target.value;
+                if (val === "" || (/^\d+$/.test(val) && val.length <= 5 && parseInt(val) <= maxDaysBack)) {
+                  setDaysBack(val);
+                }
+              }}
+              min={1}
+              max={maxDaysBack}
+              className="bg-[#ffffff26] rounded-sm border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none w-16 text-center"
+            />
+            <span className="text-white">days</span>
           </div>
         </div>
-        <div className="flex items-center justify-between w-full">
-          <div className="flex items-center space-x-3">
-          <label
-            htmlFor="expirationFilter"
-            className="text-white font-medium"
-          >
-            Filter by expiration date:
-          </label>
-          <select
-            id="expirationFilter"
-            value={selectedExpiration}
-            onChange={(e) => setSelectedExpiration(e.target.value)}
-            className="bg-[#ffffff26] h-8 pb-0.5 px-2 rounded-sm border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none focus:bg-[#26364b]"
-          >
-            <option value="All">All</option>
-            {expirationOptions.map((exp, index) => (
-              <option key={index} value={exp}>
-                {new Date(exp).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </option>
-            ))}
-          </select>
-          </div>
-        </div>
-       <div className="flex flex-col sm:flex-row sm:items-start sm:space-x-4 w-full mt-6 space-y-2 sm:space-y-0">
+      </div>
+      <div className="flex flex-col reset-on-top:flex-row reset-on-top:items-center reset-on-top:space-x-3 space-y-2 reset-on-top:space-y-0">
+        <label 
+          htmlFor="expirationFilter" 
+          className="text-white font-medium">
+          Filter by expiration date:
+        </label>
+        <select
+          id="expirationFilter"
+          value={selectedExpiration}
+          onChange={(e) => setSelectedExpiration(e.target.value)}
+          className="bg-[#ffffff26] h-8 pb-0.5 px-2 rounded-sm border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none focus:bg-[#26364b]"
+        >
+          <option value="All">All</option>
+          {expirationOptions.map((exp, index) => (
+            <option key={index} value={exp}>
+              {new Date(exp).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="flex flex-col sm:flex-row sm:items-start sm:space-x-3 w-full mt-6 space-y-2 sm:space-y-0">
         <label className="text-white whitespace-nowrap font-medium">
           Filter by contract duration:
         </label>
@@ -521,7 +520,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
             />
             {daysOnHover && !movingSlider && (
                 <div
-                  className="absolute -top-8 bg-gray-800 text-white text-xs px-2 py-1 rounded pointer-events-none transition-opacity duration-200"
+                  className="absolute -top-8 bg-gray-800 text-white text-reset-on-top px-2 py-1 rounded pointer-events-none transition-opacity duration-200"
                   style={{ left: daysOnHover.x, transform: "translateX(-50%)" }}
                 >
                   {daysOnHover.value} days

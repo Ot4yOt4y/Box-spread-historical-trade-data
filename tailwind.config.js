@@ -13,6 +13,8 @@ module.exports = {
         opensans: ['"Open Sans"', 'sans-serif']
       },
       screens: {
+        'reset-on-top':'500px',
+        'sm-md': '350px',
         'md-lg': '800px', 
         'md-lg-main': '1300px',
         'md-lg-main-1': '1400px',
