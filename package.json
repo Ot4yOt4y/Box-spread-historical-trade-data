@@ -1,7 +1,7 @@
 {
   "name": "estx50-box-spreads",
   "version": "0.1.0",
-  "homepage": "https://ot4yot4y.github.io/Box-spread-trades-history",
+  "homepage": "https://ot4yot4y.github.io/Box-spread-historical-trade-data",
   "private": true,
   "dependencies": {
     "@fontsource/inter": "^5.2.6",
