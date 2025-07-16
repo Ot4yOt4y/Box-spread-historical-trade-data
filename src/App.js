@@ -43,19 +43,19 @@ function App() {
     <div className="min-h-screen flex flex-col bg-[url(/public/background.jpeg)] bg-cover bg-center bg-no-repeat bg-fixed">
       <div className="flex-1 shadow-lg">
         <div
-          className="bg-[#010b1b] sm:bg-opacity-80"
+          className="bg-[#010b1b] sm:bg-opacity-70 md-lg-main2:bg-opacity-70"
           style={{
             backgroundImage:
-              'linear-gradient(to right, transparent 0%, #010b1b 35%, #010b1b 65%, transparent 100%)'
+              'linear-gradient(to right, transparent 0%, #010b1b 30%, #010b1b 70%, transparent 100%)'
           }}
         >
-          <header className="fixed top-0 left-0 w-full z-50 bg-transparent border-b border-gray-400 border-opacity-30 backdrop-blur-3xl">
-            <div className="md-lg:w-[100%] md-lg-main2:w-[83%] mx-auto">
+          <header className="fixed top-0 left-0 w-full z-50 bg-transparent">
+            <div className="w-[100%] md-lg-main2:w-[80%] mx-auto border-b border-gray-400 border-opacity-30 backdrop-blur-3xl">
               <nav className="relative">
-                <div className="hidden md-lg-main2:flex justify-between items-center mx-auto py-6 md-lg-main2:w-[77%] md-lg-main-2:w-[65%] md-lg-main-1-2:w-[69%] md-lg-main1:w-[71%] md-lg-main-1:w-[76%] md-lg-main:w-[80%] md:w-[84%]">
+                <div className="hidden flex justify-between items-center mx-auto py-6 md-lg-main2:w-[77%] md-lg-main-2:w-[65%] md-lg-main-1-2:w-[69%] md-lg-main1:w-[71%] md-lg-main-1:w-[76%] md-lg-main:w-[80%] md:w-[84%]">
                   <div className="flex w-full items-center md-lg-main2:gap-16">
-                    <div className="text-xl text-white space">Box Spread - Historical trade data</div>
-                    <div className="flex md-lg-main2:space-x-16 ml-auto pr-8">
+                    <div className="text-lg pt-0.5 text-white space">Box Spread - Historical trade data</div>
+                    <div className="flex md-lg-main2:space-x-16 ml-auto pr-4">
                       <button
                         onClick={() => {
                           setActiveTab("ESTX50 (OESX)");
@@ -98,10 +98,10 @@ function App() {
                   </div> 
                 </div>
 
-                <div className="md-lg-main2:hidden flex justify-start px-4 py-4">
+                <div className="flex justify-start px-4 py-4">
                   <button
                     onClick={() => setshowHamburgerMenu((prev) => !prev)}
-                    className="text-white focus:outline-none"
+                    className="text-white focus:outline-none hover:text-blue-100 hover:scale-105"
                   >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -167,15 +167,15 @@ function App() {
           </header>
 
           <div className="w-full">
-            <div className="w-[100%] mx-auto bg-[#010b1b] bg-opacity-0 px-4 sm:px-8">
-              <main id="main-content" className="pt-24 pb-24">
+            <div className="w-[100%] md-lg-main2:w-[80%] mx-auto bg-[#010b1b] bg-opacity-50 px-4 sm:px-8">
+              <main id="main-content" className="pt-12 md:pt-20 md-lg-main2:pt-20 pb-24">
                 <InterestOverTimeChart endpoint={endpoint} instrument={activeTab} />
               </main>
             </div>
           </div>
 
           <div className="w-full">
-            <div className="w-[100%] mx-auto bg-[#00050d] bg-opacity-30 px-4 sm:px-8">
+            <div className="w-[100%] md-lg-main2:w-[80%] mx-auto bg-[#00050d] bg-opacity-30 px-4 sm:px-8">
               <section id="faq-section" className="scroll-mt-8">
                 <FAQ />
               </section>
@@ -183,7 +183,7 @@ function App() {
           </div>
 
           <div className="w-full">
-            <div className="w-[100%] mx-auto bg-[#00050d] bg-opacity-30">
+            <div className="w-[100%] md-lg-main2:w-[80%] mx-auto bg-[#00050d] bg-opacity-30">
               <footer className="text-center text-xs text-gray-400 pt-4 pb-4 backdrop-blur-3xl bg-transparent border-t border-gray-400 border-opacity-30">
                 <div className="flex items-center justify-center space-x-1">
                   <svg

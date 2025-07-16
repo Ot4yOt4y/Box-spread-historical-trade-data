@@ -15,12 +15,16 @@ module.exports = {
       screens: {
         'reset-on-top':'500px',
         'sm-md': '350px',
-        'md-lg': '800px', 
+        'mini': '400px',
+        'md-1':'850px',
+        'md-lg': '950px', 
+        'lg-main': '1150px',
         'md-lg-main': '1300px',
         'md-lg-main-1': '1400px',
         'md-lg-main1': '1500px',
         'md-lg-main-1-2':'1600px',
         'md-lg-main-2': '1700px',
+        'md-lg-main12': '1800px',
         'md-lg-main2': '1900px'
       },
     },

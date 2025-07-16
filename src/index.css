@@ -35,7 +35,7 @@ code {
   }
 
   .hamburger-title {
-    @apply relative text-blue-100 text-shadow font-semibold;
+    @apply relative text-blue-100 text-shadow font-medium;
   }
 
   html {

@@ -310,6 +310,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
 
   const options = {
     responsive: true,
+     maintainAspectRatio: false,
     interaction: {
       mode: "nearest",
       intersect: false,
@@ -425,13 +426,13 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
 
 
  return (
-    <div className="md-lg-main2:w-[68%] md-lg-main-2:w-[70%] md-lg-main-1-2:w-[76%] md-lg-main1:w-[80%] md-lg-main-1:w-[84%] lg:w-[86%] md:w-[92%] sm:w-[96%] mx-auto" ref={containerRef}>
-      <div className="mx-auto bg-[#00142c] bg-opacity-0 p-4 mb-4">
-        <Line ref={chartRef} data={chartData} options={options} height={140}/>
+    <div className="md-lg-main2:w-[80%] md-lg-main12:w-[64%] md-lg-main-2:w-[66%] md-lg-main-1-2:w-[68%] md-lg-main1:w-[70%] md-lg-main-1:w-[72%] md-lg-main:w-[77%] lg-main:w-[80%] lg:w-[85%] md-lg:w-[88%] md:w-[90%] sm:w-[96%] mx-auto" ref={containerRef}>
+      <div className="w-full h-[50vw] md-lg-main2:max-h-[540px] md-lg-main12:max-h-[530px] md-lg-main-2:max-h-[520px] md-lg-main-1-2:max-h-[510px] md-lg-main1:max-h-[500px] md-lg-main-1:max-h-[490px] md-lg-main:max-h-[470px] lg-main:max-h-[460px] lg:max-h-[440px] md-lg:max-h-[410px] md-1:max-h-[390px] md:max-h-[350px] sm:max-h-[340px] min-h-[270px] mini:min-h-[325px] reset-on-top:min-h-[100px] bg-[#00142c] bg-opacity-0 p-4 mb-4 mt-8">
+        <Line ref={chartRef} data={chartData} options={options}/>
       </div>
-      <div className="w-[98%] flex flex-col reset-on-top:space-y-6 space-y-8 bg-[#00142c] bg-opacity-0 border-opacity-50 border-t-[2px] border-b-[2px] border-black mx-auto pt-4 pb-4 mb-8">
+      <div className="w-[98%] flex flex-col pt-4 pb-4 mb-8 reset-on-top:space-y-6 space-y-16 sm-md:mt-8 pl-6 pr-6 sm:pl-4 sm:pr-4 md:pl-4 md:pr-4 bg-[#00142c] bg-opacity-0 border-opacity-50 reset-on-top:border-t-[2px] reset-on-top:border-b-[2px] border-black">
       <div className="flex flex-col reset-on-top:flex-row-reverse reset-on-top:items-center reset-on-top:justify-between w-full">
-        <div className="flex justify-start reset-on-top:justify-end reset-on-top:pr-2 mb-8 reset-on-top:mb-0">
+        <div className="flex justify-start reset-on-top:justify-end mb-16 reset-on-top:mb-0">
           <button
             onClick={resetAllFilters}
             disabled={filterIsDefault}
@@ -441,7 +442,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
           > Reset filters
           </button>
         </div>
-        <div className="flex flex-col sm-md:flex-row sm-md:items-center sm-md:space-x-3 space-y-1 sm-md:space-y-0">
+        <div className="flex flex-col reset-on-top:flex-row reset-on-top:items-center reset-on-top:space-x-3 space-y-1 reset-on-top:space-y-0">
           <label htmlFor="showDaysBack" className="text-white font-medium">
             Show trades from past:
           </label>
@@ -458,7 +459,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
               }}
               min={1}
               max={maxDaysBack}
-              className="bg-[#ffffff26] rounded-sm border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none w-16 text-center"
+              className="bg-[#ffffff26] rounded-sm border border-transparent hover:border-blue-100 text-white transition-colors duration-300 focus:outline-none text-center"
             />
             <span className="text-white">days</span>
           </div>
