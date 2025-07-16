@@ -1,4 +1,4 @@
-# Box-spread-trades-history
+# Box-spread-historical-trade-data
 [https://ot4yot4y.github.io/Box-spread-trades-history/](https://ot4yot4y.github.io/Box-spread-trades-history/)
 
 This project provides historical trade data for complex options strategy "box spread" on the EURO STOXX 50 (OESX) and Swiss Market Index (OSMI). Brokers typically don't offer past execution data for such multi-leg orders, leaving investors without a clear view of where the market has been and forcing them to estimate fair pricing.
