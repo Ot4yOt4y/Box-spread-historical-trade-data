@@ -167,7 +167,7 @@ function App() {
           </header>
 
           <div className="w-full">
-            <div className="w-[100%] md-lg-main2:w-[80%] mx-auto bg-[#010b1b] bg-opacity-50 px-2 reset-on-top:px-4 sm:px-8">
+            <div className="w-[100%] md-lg-main2:w-[80%] mx-auto bg-[#010b1b] bg-opacity-50 reset-on-top:px-4 sm:px-8">
               <main id="main-content" className="pt-12 md:pt-20 md-lg-main2:pt-20 pb-20 reset-on-top:pb-24">
                 <InterestOverTimeChart endpoint={endpoint} instrument={activeTab} />
               </main>
