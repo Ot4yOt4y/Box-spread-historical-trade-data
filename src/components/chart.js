@@ -427,7 +427,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
 
  return (
     <div className="md-lg-main2:w-[80%] md-lg-main12:w-[64%] md-lg-main-2:w-[66%] md-lg-main-1-2:w-[66%] md-lg-main1:w-[68%] md-lg-main-1:w-[72%] md-lg-main:w-[72%] lg-main:w-[77%] lg:w-[85%] md-lg:w-[88%] md:w-[90%] sm:w-[96%] mx-auto" ref={containerRef}>
-      <div className="w-full h-[50vw] md-lg-main2:max-h-[540px] md-lg-main12:max-h-[530px] md-lg-main-2:max-h-[525px] md-lg-main-1-2:max-h-[515px] md-lg-main1:max-h-[505px] md-lg-main-1:max-h-[495px] md-lg-main:max-h-[475px] lg-main:max-h-[465px] lg:max-h-[445px] md-lg:max-h-[430px] md-1:max-h-[410px] md:max-h-[375px] sm:max-h-[355px] min-h-[300px] mini:min-h-[400px] reset-on-top:min-h-[100px] reset-on-top:mb-4 mt-8 bg-[#0f172a] bg-opacity-15 p-2 reset-on-top:p-0 shadow-md rounded-md reset-on-top:bg-transparent reset-on-top:p-0">
+      <div className="w-full h-[50vw] md-lg-main2:max-h-[540px] md-lg-main12:max-h-[530px] md-lg-main-2:max-h-[525px] md-lg-main-1-2:max-h-[515px] md-lg-main1:max-h-[505px] md-lg-main-1:max-h-[495px] md-lg-main:max-h-[475px] lg-main:max-h-[465px] lg:max-h-[445px] md-lg:max-h-[430px] md-1:max-h-[410px] md:max-h-[375px] sm:max-h-[355px] min-h-[400px] mini:min-h-[450px] reset-on-top:min-h-[100px] reset-on-top:mb-4 mt-8 bg-[#0f172a] bg-opacity-20 p-2 reset-on-top:p-0 rounded-md reset-on-top:bg-transparent reset-on-top:p-0">
         <Line ref={chartRef} data={chartData} options={options}/>
       </div>
       <div className="w-full flex flex-col reset-on-top:pt-4 pb-4 mb-8 reset-on-top:space-y-6 space-y-2 sm-md:mt-8 bg-[#00142c] bg-opacity-0 border-opacity-50 reset-on-top:border-t-[2px] reset-on-top:border-b-[2px] border-black">
@@ -436,13 +436,13 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
           <button
             onClick={resetAllFilters}
             disabled={filterIsDefault}
-            className={`text-sm rounded-sm text-red-800 reset-on-top:px-1 underline underline-offset-4 hover:border-blue-100 ${
+            className={`text-sm rounded-sm text-[#808080] reset-on-top:text-red-800 reset-on-top:px-1 underline underline-offset-4 hover:border-blue-100 ${
               filterIsDefault ? "opacity-70" : "hover:font-medium transition duration-300"
             }`}
           > Reset filters
           </button>
         </div>
-        <div className="flex flex-col reset-on-top:flex-row reset-on-top:items-center reset-on-top:space-x-3 space-y-1 reset-on-top:space-y-0 bg-[#0f172a] bg-opacity-15 p-4 shadow-md rounded-md reset-on-top:bg-transparent reset-on-top:p-0 reset-on-top:shadow-none">
+        <div className="flex flex-col reset-on-top:flex-row reset-on-top:items-center reset-on-top:space-x-3 space-y-1 reset-on-top:space-y-0 bg-[#0f172a] bg-opacity-20 p-4 rounded-md reset-on-top:bg-transparent reset-on-top:p-0 reset-on-top:shadow-none">
           <label htmlFor="showDaysBack" className="text-white font-medium">
             Show trades from past:
           </label>
@@ -465,7 +465,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col reset-on-top:flex-row reset-on-top:items-center reset-on-top:space-x-3 space-y-2 reset-on-top:space-y-0 bg-[#0f172a] bg-opacity-15 p-4 shadow-md rounded-md reset-on-top:bg-transparent reset-on-top:p-0 reset-on-top:shadow-none">
+      <div className="flex flex-col reset-on-top:flex-row reset-on-top:items-center reset-on-top:space-x-3 space-y-2 reset-on-top:space-y-0 bg-[#0f172a] bg-opacity-20 p-4 rounded-md reset-on-top:bg-transparent reset-on-top:p-0 reset-on-top:shadow-none">
         <label 
           htmlFor="expirationFilter" 
           className="text-white font-medium">
@@ -489,7 +489,7 @@ const InterestOverTimeChart = ({ endpoint, instrument }) => {
           ))}
         </select>
       </div>
-      <div className="flex flex-col sm:flex-row sm:items-start sm:space-x-3 w-full mt-6 space-y-2 sm:space-y-0 bg-[#0f172a] bg-opacity-15 p-4 shadow-md rounded-md reset-on-top:bg-transparent reset-on-top:p-0 reset-on-top:shadow-none">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:space-x-3 w-full mt-6 space-y-2 sm:space-y-0 bg-[#0f172a] bg-opacity-20 p-4 rounded-md reset-on-top:bg-transparent reset-on-top:p-0 reset-on-top:shadow-none">
         <label className="text-white whitespace-nowrap font-medium">
           Filter by contract duration:
         </label>
