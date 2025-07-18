@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Box-spread-historical-trade-data/static/css/main.78060dfd.css",
-    "main.js": "/Box-spread-historical-trade-data/static/js/main.8d9b515b.js",
+    "main.css": "/Box-spread-historical-trade-data/static/css/main.79e2851b.css",
+    "main.js": "/Box-spread-historical-trade-data/static/js/main.86ac535f.js",
     "static/js/453.22df0408.chunk.js": "/Box-spread-historical-trade-data/static/js/453.22df0408.chunk.js",
     "static/media/background.jpeg": "/Box-spread-historical-trade-data/static/media/background.83e51182c0dba5663b5e.jpeg",
     "index.html": "/Box-spread-historical-trade-data/index.html",
-    "main.78060dfd.css.map": "/Box-spread-historical-trade-data/static/css/main.78060dfd.css.map",
-    "main.8d9b515b.js.map": "/Box-spread-historical-trade-data/static/js/main.8d9b515b.js.map",
+    "main.79e2851b.css.map": "/Box-spread-historical-trade-data/static/css/main.79e2851b.css.map",
+    "main.86ac535f.js.map": "/Box-spread-historical-trade-data/static/js/main.86ac535f.js.map",
     "453.22df0408.chunk.js.map": "/Box-spread-historical-trade-data/static/js/453.22df0408.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.78060dfd.css",
-    "static/js/main.8d9b515b.js"
+    "static/css/main.79e2851b.css",
+    "static/js/main.86ac535f.js"
   ]
 }
